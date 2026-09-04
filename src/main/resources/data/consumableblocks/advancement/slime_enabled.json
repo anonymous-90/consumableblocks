@@ -1,0 +1,10 @@
+{
+    "criteria": {
+        "slime_enabled": {
+            "trigger": "impossible",
+            "conditions": {
+         
+            }
+        }
+    }
+}

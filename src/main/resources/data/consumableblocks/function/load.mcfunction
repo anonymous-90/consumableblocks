@@ -1,0 +1,7 @@
+scoreboard objectives add config trigger
+# tag @a add ice_enabled
+# tag @a add slime_enabled
+
+# give @a slime_block[consumable={animation:"eat",has_consume_particles:true,consume_seconds:3},item_name={text:"Edible Slime",color:"dark_purple",bold:true},enchantment_glint_override=true,lore=[{text:"\nMakes You Bouncy",color:"green",bold:true}],minecraft:food={nutrition:0,saturation:0,can_always_eat:true},attribute_modifiers=[{type:"block_interaction_range",operation:"add_value",amount:-999999999,id:"no_place",display:{type:"hidden"},slot:"mainhand"},],custom_data={"consumable_blocks":"edible_slime"}]
+# give @a glass_bottle[consumable={animation:"eat",has_consume_particles:true,consume_seconds:3},item_name={text:"edible obsidian",color:"dark_purple",bold:true},enchantment_glint_override=true,lore=[{text:"Makes You immune to explosions",color:"green",bold:true}],minecraft:food={nutrition:0,saturation:0,can_always_eat:true},attribute_modifiers=[{type:"block_interaction_range",operation:"add_value",amount:-999999999,id:"no_place",display:{type:"hidden"},slot:"mainhand"},],custom_data={"consumable_blocks":"edibleObsidian"}]
+# give @a ice[consumable={animation:"eat",has_consume_particles:true,consume_seconds:3},item_name={text:"Edible Ice",color:"dark_purple",bold:true},enchantment_glint_override=true,lore=[{text:"\nMakes You Frictionless",color:"green",bold:true}],minecraft:food={nutrition:0,saturation:0,can_always_eat:true},custom_data={"consumable_blocks":"edibleIce"},can_break={},can_place_on={blocks:"#air"}]

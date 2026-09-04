@@ -1,0 +1,9 @@
+{
+    "criteria": {
+        "has_furnace": {
+            "trigger": "impossible",
+            "conditions": {
+            }
+        }
+    }
+}

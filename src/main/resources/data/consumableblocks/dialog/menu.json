@@ -1,0 +1,13 @@
+{
+    "type": "dialog_list",
+    "title": "Consumable Blocks",
+    
+    "dialogs": [
+        "consumableblocks:config",
+        "consumableblocks:credits",
+        "consumableblocks:help",
+        "consumableblocks:crafting_options",
+        "consumableblocks:request"
+
+    ]
+}

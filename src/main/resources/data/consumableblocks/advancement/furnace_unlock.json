@@ -1,0 +1,52 @@
+{
+    "criteria": {
+        "furnace_unlock_inworld_craft": {
+            "trigger": "inventory_changed",
+            "conditions": {
+                  "items": [
+                {
+                    "items": "furnace",
+                    "predicates": {
+                        "custom_data": {
+                            "consumable_blocks": "ediblefurnace"
+                        }
+                    }
+                }
+              ],
+              "player": {
+                "entity_tags": {
+                    "all_of": [
+                        "in_world_craft"
+                    ]
+                }
+              }
+            }
+        },
+        "furnace_unlock_craft": {
+            "trigger": "recipe_crafted",
+            "conditions": {
+            "recipe_id": "consumableblocks:furnace",
+            "ingredients": [
+             {
+                "items": "furnace",
+                "count": 1
+             },
+             {
+                "items": "experience_bottle",
+                "count": 1
+             }
+            ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "furnace_unlock_craft",
+            "furnace_unlock_inworld_craft"
+        ]
+    ],
+    "rewards": {
+        "function": "consumableblocks:unlocks/furnace_enabled",
+        "experience": 10
+    }
+}

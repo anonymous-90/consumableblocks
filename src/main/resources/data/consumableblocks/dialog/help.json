@@ -1,0 +1,119 @@
+{
+    "type": "minecraft:multi_action",
+    "title": "Help",
+    "body": [
+        {
+            "type": "minecraft:item",
+            "item": {
+                "id": "ice",
+                "components": {
+                    "enchantment_glint_override": true,
+                    "item_name": {
+                        "text": "Edible Ice",
+                        "color": "dark_purple"
+                    }
+                },
+                "count": 1
+            },
+            "description": [
+                {
+                    "text": " when eaten your speed will be increased by 2x Until you drink the targeted gene cleanser.\n To gain the ability back you must eat the block again",
+                    "color": "white",
+                    "font": "minecraft:default"
+                }
+            ],
+            "height": 15,
+            "width": 15,
+            "show_decorations": false,
+            "show_tooltip": false
+        },
+        {
+            "type": "minecraft:item",
+            "item": {
+                "id": "slime_block",
+                "count": 1,
+                "components": {
+                    "enchantment_glint_override": true,
+                    "item_name": {
+                        "text": "Edible Slime",
+                        "color": "dark_purple"
+                    }
+                }
+            },
+            "description": [
+                {
+                    "text": "when eaten makes bouncy Until you drink the targeted gene cleanser.\n To gain the ability back you must eat the block again",
+                    "color": "white",
+                    "font": "minecraft:default"
+                }
+            ],
+            "height": 15,
+            "width": 15,
+            "show_decorations": false,
+            "show_tooltip": false
+        },
+        {
+            "type": "minecraft:item",
+            "item": {
+                "id": "obsidian",
+                "count": 1,
+                "components": {
+                    "enchantment_glint_override": true,
+                    "item_name": {
+                        "text": "Edible Obsidian",
+                        "color": "dark_purple"
+                    }
+                }
+            },
+            "description": [
+                {
+                    "text": "when eaten give you explosion knockback resistance Until you drink the targeted gene cleanser.\n To gain the ability back you must eat the block again",
+                    "color": "white",
+                    "font": "minecraft:default"
+                }
+            ],
+            "height": 15,
+            "width": 15,
+            "show_decorations": false,
+            "show_tooltip": false
+        },
+        {
+            "type": "minecraft:item",
+            "item": {
+                "id": "furnace",
+                "count": 1,
+                "components": {
+                    "enchantment_glint_override": true,
+                    "item_name": {
+                        "text": "Edible Furnace",
+                        "color": "dark_purple"
+                    }
+                }
+            },
+            "description": [
+                {
+                    "text": "Adds the ability to smelt items on right Click as long as you have fuel\n Drinking the targeted gene cleanser will remove the ability Until you eat the block again.",
+                    "color": "white",
+                    "font": "minecraft:default"
+                }
+            ],
+            "width": 15,
+            "height": 15,
+            "show_decorations": false,
+            "show_tooltip": false
+        }
+    ],
+    "after_action": "close",
+    "actions": [
+        {
+            "label": "back",
+            "action": {
+                "type": "minecraft:show_dialog",
+                "dialog": "consumableblocks:menu"
+            }
+        },
+        {
+            "label": "close"
+        }
+    ]
+}

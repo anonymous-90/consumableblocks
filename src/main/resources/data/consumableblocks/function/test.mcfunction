@@ -1,0 +1,1 @@
+execute if entity @a[nbt={SelectedItem:{id:"minecraft:coal"}}] run item modify entity @a weapon.mainhand [{function:"set_components",components:{food:{saturation:0,nutrition:0,can_always_eat:true},consumable:{consume_seconds:2,animation:"eat",has_consume_particles:true},lore:[{text:"Eat To Add Fuel",color:"#FFA500"}]}}]

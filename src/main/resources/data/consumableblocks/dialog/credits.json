@@ -1,0 +1,36 @@
+{
+    "type": "notice",
+    "title": "Credits",
+    "body": {
+        "type": "plain_message",
+        "contents": [
+            {
+                "text": "Created by Gamer99",
+                "bold": true,
+                "color": "gold"
+            },
+            {
+                "text": "\n\n\nMy Youtube Channel",
+                "color": "dark_purple",
+                "bold": true,
+                "hover_event": {
+                    "action": "show_text",
+                    "value": "Click me :)"
+                },
+                "click_event": {
+                    "action": "open_url",
+                   "url": "https://www.youtube.com/@anonymousgamer4713"
+                }
+            }
+
+        ]
+    },
+    "action": {
+        "label": "back",
+        "action": {
+            "type": "minecraft:show_dialog",
+            "dialog": "consumableblocks:menu"
+        }
+    }
+    
+}

@@ -1,0 +1,217 @@
+{
+  "type": "minecraft:multi_action",
+  "title": "Config Menu",
+  "external_title": {
+    "text": "Config",
+    "hover_event": {
+      "action": "show_text",
+      "value": "test"
+    }
+  },
+  "body": [
+    {
+      "type": "minecraft:plain_message",
+      "contents": [
+        {
+          "text": "Turn on or off the ability to consume certain blocks.\nMore Blocks Coming Soon. \nClick of the §e?§r to see if you can consume the block or not. §lThis will only work if you have crafted the block To unlock it"
+        }
+      ],
+      "width":145
+    },
+    {
+      "type": "minecraft:item",
+      "item": {
+        "id": "ice",
+        "components": {
+          "enchantment_glint_override": true,
+          "item_name": {
+            "text": "Edible Ice",
+            "color": "dark_purple"
+          }
+        },
+        "count": 1
+      },
+      "description": [
+        {
+          "text": "ON ",
+          "color": "green",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "/trigger config set 1"
+          }
+        },
+        {
+          "text": "?",
+          "color": "yellow",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "/trigger config set 100"
+          }
+        },
+        {
+          "text": " Off",
+          "color": "red",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "/trigger config set 2"
+          }
+        }
+      ],
+      "show_decorations": true,
+      "show_tooltip": true
+    },
+    {
+      "type": "minecraft:item",
+      "item": {
+        "id": "slime_block",
+        "count": 1,
+        "components": {
+          "enchantment_glint_override": true,
+          "item_name": {
+            "text": "Edible Slime",
+            "color": "dark_purple"
+          }
+        }
+      },
+      "description": [
+        {
+          "text": "ON ",
+          "color": "green",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "/trigger config set 3"
+          }
+        },
+        {
+          "text": "?",
+          "color": "yellow",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "/trigger config set 99"
+          }
+        },
+        {
+          "text": " Off",
+          "color": "red",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "/trigger config set 4"
+          }
+        }
+      ]
+    },
+    {
+      "type": "minecraft:item",
+      "item": {
+        "id": "obsidian",
+        "count": 1,
+        "components": {
+          "enchantment_glint_override": true,
+          "item_name": {
+            "text": "Edible Obsidian",
+            "color": "dark_purple"
+          }
+        }
+      },
+      "description": [
+        {
+          "text": "ON ",
+          "color": "green",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "trigger config set 5"
+          }
+        },
+        {
+          "text": "?",
+          "color": "yellow",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "trigger config set 101"
+          }
+        },
+        {
+          "text": " Off",
+          "color": "red",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "trigger config set 6"
+          }
+        }
+      ]
+    },
+    {
+      "type": "minecraft:item",
+      "item": {
+        "id": "furnace",
+        "count": 1,
+        "components": {
+          "enchantment_glint_override": true,
+          "item_name": {
+            "text": "Edible Furnace",
+            "color": "dark_purple"
+          }
+        }
+      },
+      "description": [
+        {
+          "text": "ON ",
+          "color": "green",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "trigger config set 7"
+          }
+        },
+        {
+          "text": "?",
+          "color": "yellow",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "trigger config set 102"
+          }
+        },
+        {
+          "text": " Off",
+          "color": "red",
+          "font": "minecraft:default",
+          "bold": true,
+          "click_event": {
+            "action": "run_command",
+            "command": "trigger config set 8"
+          }
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "label": "Back",
+      "action": {
+        "type": "minecraft:show_dialog",
+        "dialog": "consumableblocks:menu"
+      }
+    }
+  ]
+}

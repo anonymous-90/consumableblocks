@@ -1,0 +1,10 @@
+{
+    "criteria": {
+        "sponge_enabled": {
+            "trigger": "impossible",
+            "conditions": {
+         
+            }
+        }
+    }
+}

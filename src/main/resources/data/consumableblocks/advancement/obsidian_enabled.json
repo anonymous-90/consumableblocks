@@ -1,0 +1,10 @@
+{
+    "criteria": {
+        "obsidian_enabled": {
+            "trigger": "impossible",
+            "conditions": {
+         
+            }
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+  "creativemodetab.testmod.items": "ConsumableBlocks Items",
+  "item.consumableblocks.edible_ice":"§5Edible Ice",
+  "item.consumableblocks.edible_slime":"§5Edible Slime",
+  "item.consumableblocks.edible_furnace":"§5Edible Furnace",
+  "item.consumableblocks.edible_obsidian":"§5Edible Obsidian",
+  "item.consumableblocks.ice_gene_cleanser": "Ice Gene Cleanser",
+  "item.consumableblocks.slime_gene_cleanser": "Slime Gene Cleanser",
+  "item.consumableblocks.obsidian_gene_cleanser": "Obsidian Gene Cleanser",
+  "item.consumableblocks.furnace_gene_cleanser": "Furnace Gene Cleanser",
+  "consumableblocks.edibleslime.tooltip": "§aMakes You Bouncy",
+  "consumableblocks.edibleice.tooltip": "§aIncreases Your Speed",
+  "consumableblocks.ediblefurnace.tooltip": "§aGives You The Ability To Smelt Items On Right Click",
+  "consumableblocks.edibleobsidian.tooltip": "§aMakes You Immune To Explosions",
+  "consumableblocks.icegenecleaser.tooltip": "Removes Ice Ability From DNA",
+  "consumableblocks.obsidiangenecleaser.tooltip": "Removes Obsidian Ability From DNA",
+  "consumableblocks.slimegenecleaser.tooltip": "Removes Slime Ability From DNA",
+  "consumableblocks.furnacegenecleaser.tooltip": "Removes Furnace Ability From DNA",
+  "key.consumable_blocks_key": "Smelt Item"
+
+
+}

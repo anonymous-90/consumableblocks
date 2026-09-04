@@ -1,0 +1,52 @@
+{
+    "criteria": {
+        "slime_unlock_inworld_craft": {
+            "trigger": "inventory_changed",
+            "conditions": {
+               "items": [
+                {
+                    "items": "slime_block",
+                    "predicates": {
+                        "custom_data": {
+                            "consumable_blocks": "edible_slime"
+                        }
+                    }
+                }
+              ],
+              "player": {
+                "entity_tags": {
+                    "all_of": [
+                        "in_world_craft"
+                    ]
+                }
+              }
+            }
+        },
+        "slime_unlock_craft": {
+            "trigger": "recipe_crafted",
+            "conditions": {
+            "recipe_id": "consumableblocks:slime",
+            "ingredients": [
+                {
+                    "items": "experience_bottle",
+                    "count": 1
+                },
+                {
+                    "items": "slime_block",
+                    "count": 1
+                }
+              ]
+            }
+        }
+    },
+    "requirements": [
+        [
+            "slime_unlock_craft",
+            "slime_unlock_inworld_craft"
+        ]
+    ],
+    "rewards": {
+        "function": "consumableblocks:unlocks/slime_enabled",
+        "experience": 10
+    }
+}

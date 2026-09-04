@@ -1,0 +1,9 @@
+{
+    "criteria": {
+        "ice_enabled": {
+            "trigger": "impossible",
+            "conditions": {
+            }
+        }
+    }
+}

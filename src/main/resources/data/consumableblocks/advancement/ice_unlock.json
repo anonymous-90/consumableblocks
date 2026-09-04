@@ -1,0 +1,54 @@
+{
+    "criteria": {
+        "ice_unlock_inworld_crafting": {
+            "trigger": "inventory_changed",
+            "conditions": {
+                  "items": [
+                {
+                    "items": "ice",
+                    "predicates": {
+                        "custom_data": {
+                            "consumable_blocks": "edibleIce"
+                        }
+                    }
+                }
+              ],
+              "player": {
+                "entity_tags": {
+                    "all_of": [
+                        "in_world_craft"
+                    ]
+                }
+              }
+            }
+        },
+        "ice_unlock_craft": {
+            "trigger": "recipe_crafted",
+            "conditions": {
+            "recipe_id": "consumableblocks:ice",
+            "ingredients": [
+                {
+                    "items": "ice",
+                    "count": 1
+                },
+                {
+                    "items": "experience_bottle",
+                    "count": 1
+                }
+            ]
+            }
+        }
+
+
+    },
+    "requirements": [
+        [
+            "ice_unlock_craft",
+            "ice_unlock_inworld_crafting"
+        ]
+    ],
+    "rewards": {
+        "function": "consumableblocks:unlocks/ice_enabled",
+        "experience": 10
+    }
+}

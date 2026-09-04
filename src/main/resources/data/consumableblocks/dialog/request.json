@@ -1,0 +1,40 @@
+{
+    "type": "multi_action",
+    "title": "Block Suggestions",
+    "body": {
+        "type": "plain_message",
+        "contents": [
+            {
+                "text": "§4§lWarning§r:Not all blocks requested blocks will be Added ue data pack limits or balancing issues\n"
+            },
+            {
+                "text": "\nBlocks Already Planned:\n"
+            },
+            {
+                "text": "\n§7-§eSmoker\n"
+            },
+            {
+                "text": "\n§7-§eBlast Furnace"
+            }
+            
+        ]
+    },
+    "actions": [
+        {
+            "label": "Youtube",
+            "action": {
+                "type": "open_url",
+                "url": "https://www.youtube.com/@anonymousgamer4713"
+            },
+            "tooltip": "leave a comment on the demo video!(§4to be added)"
+        },
+        {
+            "label": "Back",
+            "action": {
+                "type": "minecraft:show_dialog",
+                "dialog": "consumableblocks:menu"
+            }
+        }
+    ],
+    "columns": 1
+}

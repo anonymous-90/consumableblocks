@@ -1,0 +1,39 @@
+{
+    "type": "multi_action",
+    "title": "Crafting Mode",
+    "actions": [
+        {
+            "label": "Recipe Mode",
+            "tooltip": [
+                {
+                    "text": "Turns Off In world crafting for game performance",
+                    "color": "white"
+                }
+            ],
+            "action": {
+                "type": "run_command",
+                "command": "/trigger config set 1000"
+            }
+        },
+        {
+            "label": "In World Mode",
+            "tooltip": [
+                {
+                    "text": "Warning this can cause lag and other issues on weaker computers/servers. use the Recipe Mode if game performance is an issue.",
+                    "color": "red"
+                }
+            ],
+            "action": {
+                "type": "run_command",
+                "command": "/trigger config set 1001"
+            }
+        },
+        {
+            "label": "Back",
+            "action": {
+                "type": "show_dialog",
+                "dialog": "consumableblocks:menu"
+            }
+        }
+    ]
+}

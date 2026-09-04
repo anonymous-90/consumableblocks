@@ -1,0 +1,53 @@
+{
+    "criteria": {
+        "obsidian_unlock_inworld_craft": {
+            "trigger": "inventory_changed",
+            "conditions": {
+                  "items": [
+                {
+                    "items": "obsidian",
+                    "predicates": {
+                        "custom_data": {
+                            "consumable_blocks": "edibleObsidian"
+                        }
+                    }
+                }
+              ],
+              "player": {
+                "entity_tags": {
+                    "all_of": [
+                        "in_world_craft"
+                    ]
+                }
+              }
+            }
+        },
+        "obsidian_unlock_craft": {
+            "trigger": "recipe_crafted",
+            "conditions": {
+            "recipe_id": "consumableblocks:obsidian",
+            "ingredients": [
+             {
+                "items": "obsidian",
+                "count": 1
+             },
+             {
+                "items": "experience_bottle",
+                "count": 1
+             }
+              ]
+            }
+        }
+    },
+    "requirements":[
+        [
+            "obsidian_unlock_inworld_craft",
+            "obsidian_unlock_craft"
+        ]
+
+    ],
+    "rewards": {
+        "function": "consumableblocks:unlocks/obsidian_enabled",
+        "experience": 10
+    }
+}

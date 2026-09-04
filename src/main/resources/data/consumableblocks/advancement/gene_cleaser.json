@@ -1,0 +1,68 @@
+{
+    "criteria": {
+        "Ice_cleanser":{
+            "trigger": "consume_item",
+            "conditions": {
+                "item": {
+                    "items": "paper",
+                    "predicates": {
+                        "custom_data": {
+                            "consumable_blocks": "Ice_cleanser"
+                        }
+                    }
+                }
+            }
+        },
+        "Obsidian_cleanser":{
+            "trigger": "consume_item",
+            "conditions": {
+                "item": {
+                    "items": "paper",
+                    "predicates": {
+                        "custom_data": {
+                            "consumable_blocks": "Obsidian_cleanser"
+                        }
+                    }
+                }
+            }
+        },
+        "Slime_cleanser":{
+            "trigger": "consume_item",
+            "conditions": {
+                "item": {
+                    "items": "paper",
+                    "predicates": {
+                        "custom_data": {
+                            "consumable_blocks": "Slime_cleanser"
+                        }
+                    }
+                }
+            }
+        },
+        "Furnace_cleanser":{
+            "trigger": "consume_item",
+            "conditions": {
+                "item": {
+                    "items": "paper",
+                    "predicates": {
+                        "custom_data": {
+                            "consumable_blocks": "Furnace_cleanser"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "requirements": [
+        [
+            "Ice_cleanser",
+            "Obsidian_cleanser",
+            "Slime_cleanser",
+            "Furnace_cleanser"
+        ]
+    ],
+    "rewards": {
+        "function": "consumableblocks:gene_cleaser"
+    }
+
+}

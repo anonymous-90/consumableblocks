@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "consumableblocks",
+	"version": "${version}",
+	"name": "ConsumableBlocks",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"sources": "N/a"
+	},
+	"license": "MIT-license",
+	"icon": "assets/consumableblocks/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.gamer.consumableblocks.ConsumableBlocks"
+		],
+		"client": [
+			"net.gamer.consumableblocks.ConsumableBlocksClient"
+
+		],
+		"fabric-datagen": [
+			"net.gamer.consumableblocks.ConsumableBlocksDataGenerator"
+		]
+	},
+	"mixins": [
+		"consumableblocks.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
