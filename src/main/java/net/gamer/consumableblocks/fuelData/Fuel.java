@@ -49,6 +49,9 @@ public class Fuel {
         public boolean hasFuelAttachment(){
             return this.target.hasAttached(Current_Fuel);
         }
+        public static void registerFuelData(){
+            ConsumableBlocks.LOGGER.info("registered Fuel Data for" + ConsumableBlocks.MOD_ID );
+        }
     }
 
 }
