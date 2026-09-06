@@ -15,7 +15,6 @@ public class Fuel {
             integerBuilder -> integerBuilder
                     .persistent(Codec.INT)
                     .syncWith(ByteBufCodecs.INT, AttachmentSyncPredicate.targetOnly())
-                    .initializer(()->0)
                     .copyOnDeath()
     );
     private static final AttachmentType<Integer> Max_Fuel = AttachmentRegistry.create(
@@ -24,6 +23,9 @@ public class Fuel {
                     .persistent(Codec.INT)
                     .syncWith(ByteBufCodecs.INT, AttachmentSyncPredicate.targetOnly())
     );
+        public static void registerFuelData(){
+            ConsumableBlocks.LOGGER.info("registered Fuel Data for" + ConsumableBlocks.MOD_ID );
+        }
     public static FuelData get(AttachmentTarget target){
         return new FuelData(target);
     }
@@ -48,9 +50,6 @@ public class Fuel {
         }
         public boolean hasFuelAttachment(){
             return this.target.hasAttached(Current_Fuel);
-        }
-        public static void registerFuelData(){
-            ConsumableBlocks.LOGGER.info("registered Fuel Data for" + ConsumableBlocks.MOD_ID );
         }
     }
 

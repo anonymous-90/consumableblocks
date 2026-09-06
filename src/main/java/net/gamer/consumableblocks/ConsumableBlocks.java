@@ -17,11 +17,11 @@ public class ConsumableBlocks implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		Fuel.registerFuelData();
 		ModCreativeModeTabs.registerModCreativeModeTabs();
 		ModItems.registerModItems();
 		ModEvents.EventRegister();
 		ModPackets.registerPackets();
-		Fuel.FuelData.registerFuelData();
 	}
 	public static Identifier id(String path) {
 		return Identifier.fromNamespaceAndPath(MOD_ID, path);
