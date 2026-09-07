@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.gamer.consumableblocks.networking.packet.SmeltPayloadC2S;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 public class ModPackets {
     private static void registerClientBound(PayloadTypeRegistry<RegistryFriendlyByteBuf> registry){

@@ -33,8 +33,8 @@ public class Fuel {
         public int getCurrentFuel(){
             return this.target.getAttachedOrElse(Current_Fuel,0);
         }
-        public int DecrementCurrentFuel(int value){
-            return this.target.modifyAttached(Current_Fuel,currentFuel -> currentFuel-value);
+        public void DecrementCurrentFuel(int value){
+            this.target.modifyAttached(Current_Fuel, currentFuel -> currentFuel - value);
         }
         public void setCurrentFuel(int value){
             this.target.setAttached(Current_Fuel,value);
@@ -45,9 +45,7 @@ public class Fuel {
         public void setMaxFuel(int value){
             this.target.setAttached(Max_Fuel,value);
         }
-        public void RemoveFuelAttachment(){
-            this.target.removeAttached(Current_Fuel);
-        }
+
         public boolean hasFuelAttachment(){
             return this.target.hasAttached(Current_Fuel);
         }
