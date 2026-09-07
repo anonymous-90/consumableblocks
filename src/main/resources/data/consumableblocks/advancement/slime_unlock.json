@@ -25,7 +25,7 @@
         "slime_unlock_craft": {
             "trigger": "recipe_crafted",
             "conditions": {
-            "recipe_id": "consumableblocks:slime",
+            "recipe_id": "consumableblocks:edible_slime",
             "ingredients": [
                 {
                     "items": "experience_bottle",

@@ -1,6 +1,6 @@
 {
     "criteria": {
-        "sponge_enabled": {
+        "furnace_enabled": {
             "trigger": "impossible",
             "conditions": {
          

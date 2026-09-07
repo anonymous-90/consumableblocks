@@ -25,7 +25,7 @@
         "ice_unlock_craft": {
             "trigger": "recipe_crafted",
             "conditions": {
-            "recipe_id": "consumableblocks:ice",
+            "recipe_id": "consumableblocks:edible_ice",
             "ingredients": [
                 {
                     "items": "ice",

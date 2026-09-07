@@ -1,1 +1,0 @@
-advancement grant @s only consumable_blocks:lightning_rod_enabled

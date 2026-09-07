@@ -25,7 +25,7 @@
         "obsidian_unlock_craft": {
             "trigger": "recipe_crafted",
             "conditions": {
-            "recipe_id": "consumableblocks:obsidian",
+            "recipe_id": "consumableblocks:edible_obsidian",
             "ingredients": [
              {
                 "items": "obsidian",

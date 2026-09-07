@@ -25,7 +25,7 @@
         "furnace_unlock_craft": {
             "trigger": "recipe_crafted",
             "conditions": {
-            "recipe_id": "consumableblocks:furnace",
+            "recipe_id": "consumableblocks:edible_furnace",
             "ingredients": [
              {
                 "items": "furnace",

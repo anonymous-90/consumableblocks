@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ConsumableBlocks",
+  "key": {
+    "b": "minecraft:furnace",
+    "e": "minecraft:glass_bottle",
+    "w": "minecraft:water_bucket"
+  },
+  "pattern": [
+    " b ",
+    " e ",
+    " w "
+  ],
+  "result": {
+    "id": "consumableblocks:furnace_gene_cleanser"
+  }
+}

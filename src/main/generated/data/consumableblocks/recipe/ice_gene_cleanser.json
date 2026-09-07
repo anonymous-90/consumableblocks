@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "ConsumableBlocks",
+  "key": {
+    "b": "minecraft:ice",
+    "e": "minecraft:glass_bottle",
+    "w": "minecraft:water_bucket"
+  },
+  "pattern": [
+    " b ",
+    " e ",
+    " w "
+  ],
+  "result": {
+    "id": "consumableblocks:ice_gene_cleanser"
+  }
+}
