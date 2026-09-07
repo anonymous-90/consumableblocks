@@ -1,7 +1,4 @@
 package net.gamer.consumableblocks.events;
-
-
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.gamer.consumableblocks.ConsumableBlocks;
