@@ -16,7 +16,7 @@ import java.util.Objects;
 public class ModEvents {
 
     public static void EventRegister(){
-        UseItemCallback.EVENT.register((player, level, hand) -> {
+        UseItemCallback.EVENT.register((player, level, _) -> {
             if(player instanceof  ServerPlayer serverPlayer){
                 boolean HasFurnace = serverPlayer.getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(level.getServer()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "has_furnace")))).isDone();
                 boolean FurnaceEnabled = serverPlayer.getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(level.getServer()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "furnace_enabled")))).isDone();
@@ -55,7 +55,7 @@ public class ModEvents {
                     player.sendOverlayMessage(Component.literal("§4§lCurrent Fuel 0 Use Coal To Refuel"));
                 }else if(IsSmeltable){
                     player.sendOverlayMessage(Component.literal("§6§lPress B To Use Smelting Ability"));
-                }else if(!IsSmeltable){
+                }else {
                     player.sendOverlayMessage(Component.literal("§6§lCurrent Fuel: " + Fuel.get(player).getCurrentFuel()));
                 }
             }
