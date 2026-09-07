@@ -28,7 +28,9 @@ public class ConsumableBlocksClient implements ClientModInitializer {
 
 
 
+
         }
+
     }
 
 }
