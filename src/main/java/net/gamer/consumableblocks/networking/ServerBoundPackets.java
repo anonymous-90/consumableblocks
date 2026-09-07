@@ -9,6 +9,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -54,7 +55,9 @@ public class ServerBoundPackets {
 
                 }
                 if(Fuel.get(context.player()).getCurrentFuel() == 0){
-                    context.player().sendOverlayMessage(Component.literal("§4§lNoFuel Eat Some Coal" + context.player().hasAttached(Fuel.Current_Fuel)));
+                    Holder<SoundEvent> SoundHolder = Holder.direct(SoundEvents.ANVIL_LAND);
+                    context.player().connection.send(new ClientboundSoundPacket(SoundHolder,SoundSource.BLOCKS,context.player().getX(),context.player().getY(),context.player().getZ(),1.0f,1.0f,context.player().getRandom().nextLong()));
+                    context.player().sendOverlayMessage(Component.literal("§4§lNoFuel Eat Some Coal"));
 
 
 
