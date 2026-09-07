@@ -1,18 +1,18 @@
 package net.gamer.consumableblocks.events;
 
 
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.gamer.consumableblocks.ConsumableBlocks;
 import net.gamer.consumableblocks.fuelData.Fuel;
-import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 
 import java.util.Objects;
 
@@ -49,11 +49,20 @@ public class ModEvents {
 
             return InteractionResult.PASS;
         });
-//        ServerPlayerEvents.COPY_FROM.register((oldPlayer, newPlayer, alive) -> {
-//            if(oldPlayer.hasAttached(Fuel.Current_Fuel)){
-//                newPlayer.setAttached(Fuel.Current_Fuel, oldPlayer.getAttached(Fuel.Current_Fuel));
-//            }
-//        });
+        // temp
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
+            for(ServerPlayer player: server.getPlayerList().getPlayers()){
+                boolean IsSmeltable =player.level().recipeAccess().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(player.getMainHandItem()),player.level()).isPresent();
+
+                if(player.hasAttached(Fuel.Current_Fuel) && Fuel.get(player).getCurrentFuel() == 0){
+                    player.sendOverlayMessage(Component.literal("§4§lCurrent Fuel 0 Use Coal To Refuel"));
+                }else if(IsSmeltable){
+                    player.sendOverlayMessage(Component.literal("§6§lPress B To Use Smelting Ability"));
+                }else if(!IsSmeltable){
+                    player.sendOverlayMessage(Component.literal("§6§lCurrent Fuel: " + Fuel.get(player).getCurrentFuel()));
+                }
+            }
+        });
     }
 
 
