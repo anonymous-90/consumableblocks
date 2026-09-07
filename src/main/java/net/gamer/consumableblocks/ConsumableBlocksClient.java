@@ -24,10 +24,6 @@ public class ConsumableBlocksClient implements ClientModInitializer {
     public static void onEndTick(Minecraft client){
         while (ModKeymappings.SmeltItem.consumeClick()){
             assert client.player != null;
-            if(client.player.isCrouching() && client.player.getAttached(Fuel.Current_Fuel) != null){
-//                client.player.playSound(SoundEvents.ANVIL_LAND,1f,1f);
-            client.player.sendOverlayMessage(Component.literal("attachedFuel " + client.player.hasAttached(Fuel.Current_Fuel)));
-            }
             ClientPlayNetworking.send(new SmeltPayloadC2S("test",1));
 
 
