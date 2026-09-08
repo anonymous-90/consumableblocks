@@ -56,4 +56,5 @@ public class EdibleFurnace extends Item {
         }
         return super.finishUsingItem(itemStack, level, entity);
     }
+
 }

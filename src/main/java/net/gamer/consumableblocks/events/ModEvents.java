@@ -47,19 +47,19 @@ public class ModEvents {
             return InteractionResult.PASS;
         });
         // temp
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
-            for(ServerPlayer player: server.getPlayerList().getPlayers()){
-                boolean IsSmeltable =player.level().recipeAccess().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(player.getMainHandItem()),player.level()).isPresent();
-
-                if(player.hasAttached(Fuel.Current_Fuel) && Fuel.get(player).getCurrentFuel() == 0){
-                    player.sendOverlayMessage(Component.literal("§4§lCurrent Fuel 0 Use Coal To Refuel"));
-                }else if(IsSmeltable){
-                    player.sendOverlayMessage(Component.literal("§6§lPress B To Use Smelting Ability"));
-                }else {
-                    player.sendOverlayMessage(Component.literal("§6§lCurrent Fuel: " + Fuel.get(player).getCurrentFuel()));
-                }
-            }
-        });
+//        ServerTickEvents.END_SERVER_TICK.register(server -> {
+//            for(ServerPlayer player: server.getPlayerList().getPlayers()){
+//                boolean IsSmeltable =player.level().recipeAccess().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(player.getMainHandItem()),player.level()).isPresent();
+//
+//                if(player.hasAttached(Fuel.Current_Fuel) && Fuel.get(player).getCurrentFuel() == 0){
+//                    player.sendOverlayMessage(Component.literal("§4§lCurrent Fuel 0 Use Coal To Refuel"));
+//                }else if(IsSmeltable){
+//                    player.sendOverlayMessage(Component.literal("§6§lPress B To Use Smelting Ability"));
+//                }else {
+//                    player.sendOverlayMessage(Component.literal("§6§lCurrent Fuel: " + Fuel.get(player).getCurrentFuel()));
+//                }
+//            }
+//        });
     }
 
 
