@@ -30,7 +30,6 @@ public class ServerBoundPackets {
                     context.player().getMainHandItem().shrink(1);
                     Fuel.get(context.player()).DecrementCurrentFuel(1);
                     context.player().connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BLAZE_SHOOT),SoundSource.MASTER,context.player().getX(),context.player().getY(),context.player().getZ(),1.0f,1.0f,context.player().getRandom().nextLong()));
-                    context.player().sendOverlayMessage(Component.literal("§6Fuel:"+Fuel.get(context.player()).getCurrentFuel()));
 
                 }
                 if(Fuel.get(context.player()).getCurrentFuel() >0 && context.player().isCrouching() && HasFurnace && FurnaceEnabled && FurnaceUnlocked){
@@ -40,7 +39,6 @@ public class ServerBoundPackets {
                         context.player().getMainHandItem().shrink(context.player().getMainHandItem().count());
                         context.player().addItem(ItemwholeStack);
                         context.player().connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BLAZE_SHOOT),SoundSource.MASTER,context.player().getX(),context.player().getY(),context.player().getZ(),1.0f,1.0f,context.player().getRandom().nextLong()));
-                        context.player().sendOverlayMessage(Component.literal("§6Fuel:"+Fuel.get(context.player()).getCurrentFuel()));
 
 
                     }else if(Fuel.get(context.player()).getCurrentFuel() < context.player().getMainHandItem().count() && Fuel.get(context.player()).getCurrentFuel() > 0){
@@ -49,7 +47,6 @@ public class ServerBoundPackets {
                         context.player().addItem(ItemPartialStack);
                         Fuel.get(context.player()).DecrementCurrentFuel(Fuel.get(context.player()).getCurrentFuel());
                         context.player().connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BLAZE_SHOOT),SoundSource.MASTER,context.player().getX(),context.player().getY(),context.player().getZ(),1.0f,1.0f,context.player().getRandom().nextLong()));
-                        context.player().sendOverlayMessage(Component.literal("§6Fuel:"+Fuel.get(context.player()).getCurrentFuel()));
                     }
 
                     }

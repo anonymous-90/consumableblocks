@@ -18,7 +18,7 @@ public class ConsumableBlocksClient implements ClientModInitializer {
         ModKeymappings.Register();
         ClientTickEvents.END_CLIENT_TICK.register(ConsumableBlocksClient::onEndTick);
         Fuelbar.RegisterElement();
-        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"test"),Fuelbar::extract);
+        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"test"), (graphics, deltaTracker) -> Fuelbar.extract(graphics));
     }
     public static void onEndTick(Minecraft client){
         while (ModKeymappings.SmeltItem.consumeClick()){

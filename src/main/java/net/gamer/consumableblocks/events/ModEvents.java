@@ -24,20 +24,15 @@ public class ModEvents {
                 Fuel.get(player).setMaxFuel(100);
                 if(player.getMainHandItem().getItem() == Items.COAL && Fuel.get(player).getCurrentFuel() != 100 && !player.isCrouching() && HasFurnace && FurnaceEnabled && FurnaceUnlocked){
                     Fuel.get(player).setCurrentFuel(Fuel.get(player).getCurrentFuel()+1);
-                    player.sendOverlayMessage(Component.literal("§6Fuel: " + Fuel.get(player).getCurrentFuel()));
                     player.getMainHandItem().shrink(1);
                 }else if (player.getMainHandItem().getItem() == Items.COAL && Fuel.get(player).getCurrentFuel() != 100 && player.isCrouching() && HasFurnace && FurnaceEnabled && FurnaceUnlocked){
                     int SpaceLeft = Fuel.get(player).getMaxFuel() - Fuel.get(player).getCurrentFuel();
                     int LeftToMove = Math.min(player.getMainHandItem().count(),SpaceLeft);
                     int newFuel = Fuel.get(player).getCurrentFuel() + LeftToMove;
                     Fuel.get(player).setCurrentFuel(newFuel);
-                    player.sendOverlayMessage(Component.literal("§6Fuel: " + Fuel.get(player).getCurrentFuel()));
                     player.getMainHandItem().shrink(LeftToMove);
 
 
-                }
-                if(player.getMainHandItem().getItem() == Items.DIAMOND){
-                    player.sendOverlayMessage(Component.literal("maxFuel " +Fuel.get(player).getMaxFuel()));
                 }
                 if(player.getMainHandItem().getItem() == Items.STICK){
                     player.sendOverlayMessage(Component.literal("CurrentFuel " +Fuel.get(player).getCurrentFuel()));
@@ -46,20 +41,6 @@ public class ModEvents {
 
             return InteractionResult.PASS;
         });
-        // temp
-//        ServerTickEvents.END_SERVER_TICK.register(server -> {
-//            for(ServerPlayer player: server.getPlayerList().getPlayers()){
-//                boolean IsSmeltable =player.level().recipeAccess().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(player.getMainHandItem()),player.level()).isPresent();
-//
-//                if(player.hasAttached(Fuel.Current_Fuel) && Fuel.get(player).getCurrentFuel() == 0){
-//                    player.sendOverlayMessage(Component.literal("§4§lCurrent Fuel 0 Use Coal To Refuel"));
-//                }else if(IsSmeltable){
-//                    player.sendOverlayMessage(Component.literal("§6§lPress B To Use Smelting Ability"));
-//                }else {
-//                    player.sendOverlayMessage(Component.literal("§6§lCurrent Fuel: " + Fuel.get(player).getCurrentFuel()));
-//                }
-//            }
-//        });
     }
 
 
