@@ -9,6 +9,7 @@ import net.gamer.consumableblocks.hud.Fuelbar;
 import net.gamer.consumableblocks.keymapping.ModKeymappings;
 import net.gamer.consumableblocks.networking.packet.SmeltPayloadC2S;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
 
@@ -28,6 +29,9 @@ public class ConsumableBlocksClient implements ClientModInitializer {
 
 
 
+        }
+        if(client.player != null && client.player.input.keyPresses.jump()){
+            client.player.sendSystemMessage(Component.literal(("bector")));
         }
 
     }

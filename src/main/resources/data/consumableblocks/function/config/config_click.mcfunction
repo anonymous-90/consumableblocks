@@ -82,8 +82,5 @@ execute if score @s[tag=in_world_craft] config matches 1000 run tag @s remove in
 execute if score @s config matches 1001 run function consumableblocks:craft/recipe_config
 execute if score @s config matches 1000 run function consumableblocks:craft/recipe_config
 
-#-----------------------------------------------------
-# --- GLOBAL CLEANUP (At the very bottom) ---
-# This catches both normal clicks (1, 2) and our safety flag (99) and resets them completely
 scoreboard players set @s[scores={config=1..}] config 0
 scoreboard players enable @s config

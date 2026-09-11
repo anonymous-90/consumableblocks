@@ -1,5 +1,4 @@
 package net.gamer.consumableblocks.events;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.gamer.consumableblocks.ConsumableBlocks;
 import net.gamer.consumableblocks.fuelData.Fuel;
@@ -8,8 +7,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 
 import java.util.Objects;
 
@@ -41,6 +38,20 @@ public class ModEvents {
 
             return InteractionResult.PASS;
         });
+//        ServerTickEvents.END_SERVER_TICK.register(server -> {
+//            for(ServerPlayer Serverplayer: server.getPlayerList().getPlayers()){
+//                boolean HasSlimeAbility = Serverplayer.getAttributes().hasModifier(Attributes.BOUNCINESS,Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_eaten"));
+//                LocalPlayer localPlayer = Minecraft.getInstance().player;
+//
+//                    if (Serverplayer.fallDistance == 0 && Serverplayer.getLastClientInput().jump() && !Serverplayer.isJumping()){
+//                    Serverplayer.level().sendParticles(Serverplayer, ParticleTypes.ITEM_SLIME,false,true,Serverplayer.getX(),Serverplayer.getY()+0.5,Serverplayer.getZ(),59,1,0,1,1);
+//                    Serverplayer.sendOverlayMessage(Component.literal("tets"));
+//
+//                    }
+//
+//
+//            }
+//        });
     }
 
 

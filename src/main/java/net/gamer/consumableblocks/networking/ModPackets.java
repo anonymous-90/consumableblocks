@@ -12,6 +12,7 @@ public class ModPackets {
     private static void registryServerBound(PayloadTypeRegistry<RegistryFriendlyByteBuf> registry){
         registry.register(SmeltPayloadC2S.TYPE,SmeltPayloadC2S.STREAM_CODEC);
 
+
         ServerPlayNetworking.registerGlobalReceiver(SmeltPayloadC2S.TYPE,ServerBoundPackets::handleSmeltPayload);
 
 

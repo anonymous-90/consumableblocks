@@ -14,7 +14,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 
-import javax.swing.*;
 import java.util.Objects;
 
 // on the server
