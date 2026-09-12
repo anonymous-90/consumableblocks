@@ -16,6 +16,7 @@
   "consumableblocks.obsidiangenecleaser.tooltip": "Removes Obsidian Ability From DNA",
   "consumableblocks.slimegenecleaser.tooltip": "Removes Slime Ability From DNA",
   "consumableblocks.furnacegenecleaser.tooltip": "Removes Furnace Ability From DNA",
-  "key.consumable_blocks_key": "Smelt Item"
+  "key.consumable_blocks_key": "Smelt Item",
+  "config.description": "Turn on or off the ability to consume certain blocks.Also Check If the block is enabled §lthis will only work if you have crafted the block To unlock it"
 
 }

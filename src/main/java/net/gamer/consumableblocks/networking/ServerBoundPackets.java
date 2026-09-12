@@ -4,10 +4,18 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.gamer.consumableblocks.ConsumableBlocks;
 import net.gamer.consumableblocks.fuelData.Fuel;
 import net.gamer.consumableblocks.networking.packet.SmeltPayloadC2S;
+import net.gamer.consumableblocks.networking.packet.UiPayloadC2S;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -19,48 +27,72 @@ import java.util.Objects;
 // on the server
 public class ServerBoundPackets {
     public static void handleSmeltPayload(SmeltPayloadC2S smeltPayloadC2S, ServerPlayNetworking.Context context) {
-        if (context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(context.player().getMainHandItem()),context.player().level()).isPresent() && Fuel.get(context.player()).hasFuelAttachment()){
-            var Item = context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(context.player().getMainHandItem()),context.player().level()).get().value().assemble(new SingleRecipeInput(context.player().getMainHandItem())).copy();
+        if (context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(context.player().getMainHandItem()), context.player().level()).isPresent() && Fuel.get(context.player()).hasFuelAttachment()) {
+            var Item = context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(context.player().getMainHandItem()), context.player().level()).get().value().assemble(new SingleRecipeInput(context.player().getMainHandItem())).copy();
             boolean HasFurnace = context.player().getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(context.server()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "has_furnace")))).isDone();
             boolean FurnaceEnabled = context.player().getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(context.server()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "furnace_enabled")))).isDone();
             boolean FurnaceUnlocked = context.player().getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(context.server()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "furnace_unlock")))).isDone();
-                if(Fuel.get(context.player()).getCurrentFuel() > 0 && !context.player().isCrouching() && HasFurnace && FurnaceEnabled && FurnaceUnlocked){
-                    context.player().addItem(Item);
-                    context.player().getMainHandItem().shrink(1);
-                    Fuel.get(context.player()).DecrementCurrentFuel(1);
-                    context.player().connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BLAZE_SHOOT),SoundSource.MASTER,context.player().getX(),context.player().getY(),context.player().getZ(),1.0f,1.0f,context.player().getRandom().nextLong()));
+            if (Fuel.get(context.player()).getCurrentFuel() > 0 && !context.player().isCrouching() && HasFurnace && FurnaceEnabled && FurnaceUnlocked) {
+                context.player().addItem(Item);
+                context.player().getMainHandItem().shrink(1);
+                Fuel.get(context.player()).DecrementCurrentFuel(1);
+                context.player().connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BLAZE_SHOOT), SoundSource.MASTER, context.player().getX(), context.player().getY(), context.player().getZ(), 1.0f, 1.0f, context.player().getRandom().nextLong()));
 
+            }
+            if (Fuel.get(context.player()).getCurrentFuel() > 0 && context.player().isCrouching() && HasFurnace && FurnaceEnabled && FurnaceUnlocked) {
+                var ItemwholeStack = context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(context.player().getMainHandItem()), context.player().level()).get().value().assemble(new SingleRecipeInput(context.player().getMainHandItem())).copyWithCount(context.player().getMainHandItem().getCount());
+                if (Fuel.get(context.player()).getCurrentFuel() >= context.player().getMainHandItem().count()) {
+                    Fuel.get(context.player()).DecrementCurrentFuel(context.player().getMainHandItem().count());
+                    context.player().getMainHandItem().shrink(context.player().getMainHandItem().count());
+                    context.player().addItem(ItemwholeStack);
+                    context.player().connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BLAZE_SHOOT), SoundSource.MASTER, context.player().getX(), context.player().getY(), context.player().getZ(), 1.0f, 1.0f, context.player().getRandom().nextLong()));
+
+
+                } else if (Fuel.get(context.player()).getCurrentFuel() < context.player().getMainHandItem().count() && Fuel.get(context.player()).getCurrentFuel() > 0) {
+                    var ItemPartialStack = context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(context.player().getMainHandItem()), context.player().level()).get().value().assemble(new SingleRecipeInput(context.player().getMainHandItem())).copyWithCount(Fuel.get(context.player()).getCurrentFuel());
+                    context.player().getMainHandItem().shrink(Fuel.get(context.player()).getCurrentFuel());
+                    context.player().addItem(ItemPartialStack);
+                    Fuel.get(context.player()).DecrementCurrentFuel(Fuel.get(context.player()).getCurrentFuel());
+                    context.player().connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BLAZE_SHOOT), SoundSource.MASTER, context.player().getX(), context.player().getY(), context.player().getZ(), 1.0f, 1.0f, context.player().getRandom().nextLong()));
                 }
-                if(Fuel.get(context.player()).getCurrentFuel() >0 && context.player().isCrouching() && HasFurnace && FurnaceEnabled && FurnaceUnlocked){
-                    var ItemwholeStack = context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(context.player().getMainHandItem()),context.player().level()).get().value().assemble(new SingleRecipeInput(context.player().getMainHandItem())).copyWithCount(context.player().getMainHandItem().getCount());
-                    if(Fuel.get(context.player()).getCurrentFuel() >= context.player().getMainHandItem().count()){
-                        Fuel.get(context.player()).DecrementCurrentFuel(context.player().getMainHandItem().count());
-                        context.player().getMainHandItem().shrink(context.player().getMainHandItem().count());
-                        context.player().addItem(ItemwholeStack);
-                        context.player().connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BLAZE_SHOOT),SoundSource.MASTER,context.player().getX(),context.player().getY(),context.player().getZ(),1.0f,1.0f,context.player().getRandom().nextLong()));
+
+            }
 
 
-                    }else if(Fuel.get(context.player()).getCurrentFuel() < context.player().getMainHandItem().count() && Fuel.get(context.player()).getCurrentFuel() > 0){
-                        var ItemPartialStack = context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING,new SingleRecipeInput(context.player().getMainHandItem()),context.player().level()).get().value().assemble(new SingleRecipeInput(context.player().getMainHandItem())).copyWithCount(Fuel.get(context.player()).getCurrentFuel());
-                        context.player().getMainHandItem().shrink(Fuel.get(context.player()).getCurrentFuel());
-                        context.player().addItem(ItemPartialStack);
-                        Fuel.get(context.player()).DecrementCurrentFuel(Fuel.get(context.player()).getCurrentFuel());
-                        context.player().connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.BLAZE_SHOOT),SoundSource.MASTER,context.player().getX(),context.player().getY(),context.player().getZ(),1.0f,1.0f,context.player().getRandom().nextLong()));
-                    }
-
-                    }
-
-
-                }
-                if(Fuel.get(context.player()).getCurrentFuel() == 0){
-                    Holder<SoundEvent> SoundHolder = Holder.direct(SoundEvents.ANVIL_LAND);
-                    context.player().connection.send(new ClientboundSoundPacket(SoundHolder,SoundSource.BLOCKS,context.player().getX(),context.player().getY(),context.player().getZ(),1.0f,1.0f,context.player().getRandom().nextLong()));
-                    context.player().sendOverlayMessage(Component.literal("§4§lNoFuel Eat Some Coal"));
-
-
-
+        }
+        if (Fuel.get(context.player()).getCurrentFuel() == 0) {
+            Holder<SoundEvent> SoundHolder = Holder.direct(SoundEvents.ANVIL_LAND);
+            context.player().connection.send(new ClientboundSoundPacket(SoundHolder, SoundSource.BLOCKS, context.player().getX(), context.player().getY(), context.player().getZ(), 1.0f, 1.0f, context.player().getRandom().nextLong()));
+            context.player().sendOverlayMessage(Component.literal("§4§lNoFuel Eat Some Coal"));
 
 
         }
     }
-}
+
+    public static void handleUiPayload(UiPayloadC2S uiPayloadC2S, ServerPlayNetworking.Context context) {
+        Minecraft player = Minecraft.getInstance();
+        AdvancementHolder furnace = context.player().level().getServer().getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "has_furnace"));
+        assert furnace != null;
+        AdvancementProgress progress = context.player().getAdvancements().getOrStartProgress(furnace);
+        assert player.gui.screen() != null;
+        if (uiPayloadC2S.value() == 1 ){
+//            context.player().sendOverlayMessage(Component.literal("button1"));
+            player.gui.screen().clearFocus();
+                for (String criteria : progress.getRemainingCriteria()) {
+                    context.player().getAdvancements().award(furnace, criteria);
+                    context.player().sendOverlayMessage(Component.literal("done:"+progress.isDone()));
+
+                }
+            }
+        if (uiPayloadC2S.value() == 2) {
+//            context.player().sendOverlayMessage(Component.literal("button 2"));
+
+            player.gui.screen().clearFocus();
+                for (String criteria : progress.getCompletedCriteria()) {
+                    context.player().getAdvancements().revoke(furnace, criteria);
+                    context.player().sendOverlayMessage(Component.literal("done:"+progress.isDone()));
+
+                }
+        }
+        }
+    }
