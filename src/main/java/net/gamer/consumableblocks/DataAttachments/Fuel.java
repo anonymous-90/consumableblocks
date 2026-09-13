@@ -1,4 +1,4 @@
-package net.gamer.consumableblocks.fuelData;
+package net.gamer.consumableblocks.DataAttachments;
 
 import com.mojang.serialization.Codec;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;

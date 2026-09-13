@@ -1,9 +1,10 @@
 package net.gamer.consumableblocks;
 
 import net.fabricmc.api.ModInitializer;
+import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.gamer.consumableblocks.creativeTabs.ModCreativeModeTabs;
 import net.gamer.consumableblocks.events.ModEvents;
-import net.gamer.consumableblocks.fuelData.Fuel;
+import net.gamer.consumableblocks.DataAttachments.Fuel;
 import net.gamer.consumableblocks.item.ModItems;
 import net.gamer.consumableblocks.networking.ModPackets;
 import net.minecraft.resources.Identifier;
@@ -18,6 +19,7 @@ public class ConsumableBlocks implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		Fuel.registerFuelData();
+		Abilities.registerAbilitiesData();
 		ModCreativeModeTabs.registerModCreativeModeTabs();
 		ModItems.registerModItems();
 		ModEvents.EventRegister();

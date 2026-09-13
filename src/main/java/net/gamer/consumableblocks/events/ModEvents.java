@@ -1,7 +1,8 @@
 package net.gamer.consumableblocks.events;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.gamer.consumableblocks.ConsumableBlocks;
-import net.gamer.consumableblocks.fuelData.Fuel;
+import net.gamer.consumableblocks.DataAttachments.Abilities;
+import net.gamer.consumableblocks.DataAttachments.Fuel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
@@ -32,7 +33,8 @@ public class ModEvents {
 
                 }
                 if(player.getMainHandItem().getItem() == Items.STICK){
-                    player.sendOverlayMessage(Component.literal("CurrentFuel " +Fuel.get(player).getCurrentFuel()));
+//                    player.sendOverlayMessage(Component.literal("CurrentFuel " +Fuel.get(player).getCurrentFuel()));
+                    Abilities.get(player).Remove(Abilities.HasFurnace);
                 }
             }
 

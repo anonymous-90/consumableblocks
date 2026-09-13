@@ -1,17 +1,13 @@
 package net.gamer.consumableblocks.hud;
 import net.gamer.consumableblocks.ConsumableBlocks;
-import net.gamer.consumableblocks.fuelData.Fuel;
+import net.gamer.consumableblocks.DataAttachments.Fuel;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.Items;
 import org.jspecify.annotations.NonNull;
-
-import java.awt.*;
 
 public class Fuelbar {
     private static final Minecraft minecraft = Minecraft.getInstance();

@@ -1,4 +1,5 @@
 package net.gamer.consumableblocks.menu;
+import net.gamer.consumableblocks.ConsumableBlocks;
 import net.gamer.consumableblocks.item.ModItems;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
@@ -7,7 +8,10 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.NonNull;
+
+import java.util.Objects;
 
 public class ConfigScreen extends Screen {
         public ConfigScreen(Component title) {
@@ -18,9 +22,6 @@ public class ConfigScreen extends Screen {
         protected void init() {
 
             Button Ice = Button.builder(Component.literal("ice"), (btn) -> {
-                // When the button is clicked, we can display a toast to the screen.
-                assert minecraft.player != null;
-                minecraft.player.sendSystemMessage(Component.literal("clicked Ice"));
 //                ClientPlayNetworking.send(new UiPayloadC2S("config",1));
                 ;
             }).bounds(this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 80 - this.font.lineHeight, 16, 16).build();
