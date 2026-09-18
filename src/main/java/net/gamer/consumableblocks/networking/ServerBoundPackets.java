@@ -78,7 +78,8 @@ public class ServerBoundPackets {
                     context.player().getAdvancements().award(furnace, criteria);
                     context.player().sendOverlayMessage(Component.literal("done:"+progress.isDone()));
 
-                }
+                };
+
             }
         if (uiPayloadC2S.value() == 2) {
 //            context.player().sendOverlayMessage(Component.literal("button 2"));

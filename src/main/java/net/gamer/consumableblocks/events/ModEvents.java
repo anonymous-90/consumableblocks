@@ -1,9 +1,12 @@
 package net.gamer.consumableblocks.events;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.gamer.consumableblocks.ConsumableBlocks;
 import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.gamer.consumableblocks.DataAttachments.Fuel;
+import net.gamer.consumableblocks.item.ModItems;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ServerboundContainerSlotStateChangedPacket;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
@@ -34,12 +37,18 @@ public class ModEvents {
                 }
                 if(player.getMainHandItem().getItem() == Items.STICK){
 //                    player.sendOverlayMessage(Component.literal("CurrentFuel " +Fuel.get(player).getCurrentFuel()));
-                    Abilities.get(player).Remove(Abilities.HasFurnace);
+                    Abilities.get(player).Remove(Abilities.FurnaceUnlocked);
+                }
+                if(player.getMainHandItem().getItem() == Items.DIAMOND){
+                    Abilities.get(player).Remove(Abilities.FurnaceEnabled);
+
                 }
             }
 
             return InteractionResult.PASS;
         });
+
+
 //        ServerTickEvents.END_SERVER_TICK.register(server -> {
 //            for(ServerPlayer Serverplayer: server.getPlayerList().getPlayers()){
 //                boolean HasSlimeAbility = Serverplayer.getAttributes().hasModifier(Attributes.BOUNCINESS,Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_eaten"));
@@ -54,6 +63,23 @@ public class ModEvents {
 //
 //            }
 //        });
+// temporary crafting check
+        ServerTickEvents.END_SERVER_TICK.register(server -> {
+
+            for(ServerPlayer player: server.getPlayerList().getPlayers()){
+                Abilities.AbilityData abilities = Abilities.get(player);
+                if(player.getInventory().contains(ModItems.EdibleFurnace.getDefaultInstance()) && !Abilities.get(player).has(Abilities.FurnaceUnlocked) && !abilities.has(Abilities.FurnaceEnabled)){
+                    Abilities.get(player).Add(Abilities.FurnaceUnlocked,true);
+                    player.sendSystemMessage(Component.literal("furnace unlocked"));
+                    abilities.Add(Abilities.FurnaceEnabled,true);
+                    player.sendSystemMessage(Component.literal("furnace enabled"));
+                } else {
+                    return;
+                }
+            }
+        });
+
+
     }
 
 

@@ -1,98 +1,112 @@
 package net.gamer.consumableblocks.menu;
-import net.gamer.consumableblocks.ConsumableBlocks;
+
+import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.gamer.consumableblocks.item.ModItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.PlainTextButton;
-import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.util.CommonColors;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
+import java.util.Optional;
 import org.jspecify.annotations.NonNull;
 
-import java.util.Objects;
-
 public class ConfigScreen extends Screen {
-        public ConfigScreen(Component title) {
-            super(title);
+
+    private BlockList list;
+
+    public ConfigScreen(Component title) {
+        super(title);
+    }
+
+    @Override
+    protected void init() {
+        int listWidth = 220;
+        int listHeight = this.height - 90;
+        this.list = new BlockList(this.minecraft, listWidth, listHeight, 70, 24);
+        this.list.setX((this.width - listWidth) / 2);
+        this.list.addBlock(ModItems.EdibleIce, "Ice", "consumableblocks.edibleice.tooltip", false);
+        this.list.addBlock(ModItems.EdibleSlime, "Slime", "consumableblocks.edibleslime.tooltip", false);
+        this.list.addBlock(ModItems.EdibleObsidian, "Obsidian", "consumableblocks.edibleobsidian.tooltip", false);
+        this.list.addBlock(ModItems.EdibleFurnace, "Furnace", "consumableblocks.ediblefurnace.tooltip", Abilities.get(minecraft.player).has(Abilities.FurnaceEnabled));
+
+//        Item[] extras = {Items.DIRT, Items.STONE, Items.OAK_LOG, Items.APPLE, Items.DIAMOND, Items.IRON_INGOT, Items.GOLD_INGOT, Items.BREAD, Items.CARROT, Items.POTATO, Items.BEEF, Items.PORKCHOP, Items.CHICKEN, Items.COAL, Items.EMERALD, Items.REDSTONE, Items.SUGAR, Items.WHEAT, Items.EGG, Items.FEATHER};
+//        for (Item extra : extras) {
+//            this.list.addBlock(extra, new ItemStack(extra).getHoverName().getString(), "consumableblocks.edibleice.tooltip");
+//        }
+
+        this.addRenderableWidget(this.list);
+    }
+
+    @Override
+    public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+        super.extractRenderState(graphics, mouseX, mouseY, delta);
+        graphics.textWithWordWrap(this.font, FormattedText.of("Turn on or off the ability to consume certain blocks. This will only work if you have crafted the block to unlock it."), (this.width - 220) / 2, 20, 220, CommonColors.WHITE);
+    }
+
+    class BlockList extends ObjectSelectionList<BlockEntry> {
+
+        BlockList(Minecraft minecraft, int width, int height, int y, int itemHeight) {
+            super(minecraft, width, height, y, itemHeight);
+        }
+
+        void addBlock(Item item, String name, String tooltipKey, boolean enabled) {
+            this.addEntry(new BlockEntry(item, name, tooltipKey,enabled));
         }
 
         @Override
-        protected void init() {
+        public int getRowWidth() {
+            return this.getWidth() - 20;
+        }
+    }
 
-            Button Ice = Button.builder(Component.literal("ice"), (btn) -> {
-//                ClientPlayNetworking.send(new UiPayloadC2S("config",1));
-                ;
-            }).bounds(this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 80 - this.font.lineHeight, 16, 16).build();
+    class BlockEntry extends ObjectSelectionList.Entry<BlockEntry> {
 
-            Button Slime = Button.builder(Component.literal("slime"), (btn) -> {
-                // When the button is clicked, we can display a toast to the screen.
+        private final ItemStack stack;
+        private final String name;
+        private final String tooltipKey;
+        private boolean enabled;
 
-                assert minecraft.player != null;
-                minecraft.player.sendSystemMessage(Component.literal("clicked Slime"));
-//                ClientPlayNetworking.send(new UiPayloadC2S("config",2));
-                ;
-            }).bounds(this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 120 - this.font.lineHeight, 16, 16).build();
-
-            Button Obsidian = Button.builder(Component.literal("obsidian"), (btn) -> {
-                // When the button is clicked, we can display a toast to the screen.
-                assert minecraft.player != null;
-                minecraft.player.sendSystemMessage(Component.literal("clicked Obsidian"));
-//                ClientPlayNetworking.send(new UiPayloadC2S("config",1));
-                ;
-            }).bounds(this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 160 - this.font.lineHeight, 16, 16).build();
-
-            Button Furnace = Button.builder(Component.literal("furnace"), (btn) -> {
-                // When the button is clicked, we can display a toast to the screen.
-                assert minecraft.player != null;
-                minecraft.player.sendSystemMessage(Component.literal("clicked furnace"));
-
-//                ClientPlayNetworking.send(new UiPayloadC2S("config",2));
-                ;
-            }).bounds(this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 200 - this.font.lineHeight, 16, 16).build();
-            PlainTextButton Iceon =  new PlainTextButton(this.minecraft.getWindow().getGuiScaledWidth()-this.width+180, 83 - this.font.lineHeight,20,20,Component.literal("§a§lON"),(textbtn)-> {
-                assert minecraft.player != null;
-                minecraft.player.sendSystemMessage(Component.literal("clicked Ice On"));
-            },this.font);
-
-            PlainTextButton IceStatus =  new PlainTextButton(this.minecraft.getWindow().getGuiScaledWidth()-this.width+210, 83 - this.font.lineHeight,20,20,Component.literal("§6§l?"),(textbtn)-> {
-                assert minecraft.player != null;
-                minecraft.player.sendSystemMessage(Component.literal("clicked Ice Status"));
-            },this.font);
-
-            PlainTextButton Iceoff =  new PlainTextButton(this.minecraft.getWindow().getGuiScaledWidth()-this.width+180, 83 - this.font.lineHeight,20,20,Component.literal("on"),(textbtn)-> {
-                assert minecraft.player != null;
-                minecraft.player.sendSystemMessage(Component.literal("clicked Ice off"));
-            },this.font);
-            Component IceTooltip = Component.literal(ModItems.EdibleIce.getDefaultInstance().getItemName().getString().indent(1).stripLeading()).append(Component.translatable("consumableblocks.edibleice.tooltip"));
-            Ice.setAlpha(0f);
-            Ice.setTooltip(Tooltip.create(IceTooltip));
-            Slime.setAlpha(0f);
-            Obsidian.setAlpha(0f);
-            Furnace.setAlpha(0f);
-            this.addRenderableWidget(Iceon);
-            this.addRenderableWidget(IceStatus);
-            this.addRenderableWidget(Ice);
-            this.addRenderableWidget(Slime);
-            this.addRenderableWidget(Obsidian);
-            this.addRenderableWidget(Furnace);
-
+        BlockEntry(Item item, String name, String tooltipKey, boolean enabled) {
+            this.stack = new ItemStack(item);
+            this.name = name;
+            this.tooltipKey = tooltipKey;
+            this.enabled = enabled;
         }
 
         @Override
-        public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
-            super.extractRenderState(graphics, mouseX, mouseY, delta);
-
-            // Minecraft doesn't have a "label" widget, so we'll have to draw our own text.
-            // We'll subtract the font height from the Y position to make the text appear above the button.
-            // Subtracting an extra 10 pixels will give the text some padding.
-            // font, text, x, y, color, hasShadow
-            graphics.textWithWordWrap(this.font, FormattedText.of("Turn on or off the ability to consume certain blocks.Also Check If the block is enabled §lthis will only work if you have crafted the block To unlock it"),this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 40 - this.font.lineHeight - 20, 200,0xFFFFFFFF);
-            graphics.fakeItem(ModItems.EdibleIce.getDefaultInstance(),this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 80 - this.font.lineHeight);
-            graphics.fakeItem(ModItems.EdibleSlime.getDefaultInstance(),this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 120 - this.font.lineHeight);
-            graphics.fakeItem(ModItems.EdibleObsidian.getDefaultInstance(),this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 160 - this.font.lineHeight);
-            graphics.fakeItem(ModItems.EdibleFurnace.getDefaultInstance(),this.minecraft.getWindow().getGuiScaledWidth()-this.width+150, 200 - this.font.lineHeight);
+        public void extractContent(GuiGraphicsExtractor graphics, int mouseX, int mouseY, boolean hovered, float delta) {
+            int x = this.getContentX();
+            int y = this.getContentY();
+            graphics.fakeItem(this.stack, x, y);
+            graphics.text(ConfigScreen.this.font, this.name, x + 24, y + 4, CommonColors.WHITE);
+            String status = this.enabled ? "ON" : "OFF";
+            int color = this.enabled ? CommonColors.GREEN : CommonColors.SOFT_RED;
+            graphics.text(ConfigScreen.this.font, status, this.getContentRight() - ConfigScreen.this.font.width(status) - 4, y + 4, color);
+            if (hovered) {
+                List<Component> tooltip = List.of(this.stack.getHoverName(), Component.translatable(this.tooltipKey));
+                graphics.setTooltipForNextFrame(ConfigScreen.this.font, tooltip, Optional.empty(), mouseX, mouseY);
+            }
         }
 
+        @Override
+        public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+            this.enabled = !this.enabled;
+            if (ConfigScreen.this.minecraft.player != null) {
+                ConfigScreen.this.minecraft.player.sendSystemMessage(Component.literal(this.name + " is now " + (this.enabled ? "ON" : "OFF")));
+            }
+            return true;
+        }
+
+        @Override
+        public Component getNarration() {
+            return Component.literal(this.name);
+        }
+    }
 }
