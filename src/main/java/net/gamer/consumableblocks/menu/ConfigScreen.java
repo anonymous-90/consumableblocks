@@ -85,13 +85,17 @@ public class ConfigScreen extends Screen {
             int x = this.getContentX();
             int y = this.getContentY();
             graphics.fakeItem(this.stack, x, y);
-            graphics.text(ConfigScreen.this.font, this.name, x + 24, y + 4, CommonColors.WHITE);
+//            graphics.text(ConfigScreen.this.font, this.name, x + 24, y + 4, CommonColors.WHITE);
             String status = this.enabled ? "ON" : "OFF";
             int color = this.enabled ? CommonColors.GREEN : CommonColors.SOFT_RED;
             graphics.text(ConfigScreen.this.font, status, this.getContentRight() - ConfigScreen.this.font.width(status) - 4, y + 4, color);
+            if(mouseX > 142 && mouseX < 157){
             if (hovered) {
                 List<Component> tooltip = List.of(this.stack.getHoverName(), Component.translatable(this.tooltipKey));
-                graphics.setTooltipForNextFrame(ConfigScreen.this.font, tooltip, Optional.empty(), mouseX, mouseY);
+                graphics.setTooltipForNextFrame(ConfigScreen.this.font, tooltip, Optional.empty(),mouseX,mouseY);
+//                minecraft.player.sendSystemMessage(Component.literal("mouseY: " + mouseY+"mouseX: " + mouseX));
+            }
+
             }
         }
 
