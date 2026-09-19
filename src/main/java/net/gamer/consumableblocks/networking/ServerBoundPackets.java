@@ -2,6 +2,7 @@ package net.gamer.consumableblocks.networking;
 
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.gamer.consumableblocks.ConsumableBlocks;
+import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.gamer.consumableblocks.DataAttachments.Fuel;
 import net.gamer.consumableblocks.networking.packet.SmeltPayloadC2S;
 import net.gamer.consumableblocks.networking.packet.UiPayloadC2S;
@@ -69,27 +70,31 @@ public class ServerBoundPackets {
         Minecraft player = Minecraft.getInstance();
         AdvancementHolder furnace = context.player().level().getServer().getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "has_furnace"));
         assert furnace != null;
-        AdvancementProgress progress = context.player().getAdvancements().getOrStartProgress(furnace);
+        Abilities.AbilityData ability = Abilities.get(context.player());
         assert player.gui.screen() != null;
-        if (uiPayloadC2S.value() == 1 ){
+        if (uiPayloadC2S.value() == 1  && ability.has(Abilities.IceEnabled)){
+            ability.Remove(Abilities.IceEnabled);
 //            context.player().sendOverlayMessage(Component.literal("button1"));
-            player.gui.screen().clearFocus();
-                for (String criteria : progress.getRemainingCriteria()) {
-                    context.player().getAdvancements().award(furnace, criteria);
-                    context.player().sendOverlayMessage(Component.literal("done:"+progress.isDone()));
-
-                };
-
-            }
-        if (uiPayloadC2S.value() == 2) {
-//            context.player().sendOverlayMessage(Component.literal("button 2"));
-
-            player.gui.screen().clearFocus();
-                for (String criteria : progress.getCompletedCriteria()) {
-                    context.player().getAdvancements().revoke(furnace, criteria);
-                    context.player().sendOverlayMessage(Component.literal("done:"+progress.isDone()));
-
-                }
+            }else if(uiPayloadC2S.value() == 1 &&!ability.has(Abilities.IceEnabled)){
+                ability.Add(Abilities.IceEnabled,true);
+        }
+        if (uiPayloadC2S.value() == 2 && ability.has(Abilities.SlimeEnabled)){
+            ability.Remove(Abilities.SlimeEnabled);
+//            context.player().sendOverlayMessage(Component.literal("button1"));
+        }else if(uiPayloadC2S.value() == 2&&!ability.has(Abilities.SlimeEnabled)){
+            ability.Add(Abilities.SlimeEnabled,true);
+        }
+        if (uiPayloadC2S.value() == 3  && ability.has(Abilities.ObsidianEnabled)){
+            ability.Remove(Abilities.ObsidianEnabled);
+//            context.player().sendOverlayMessage(Component.literal("button1"));
+        }else if(uiPayloadC2S.value() ==  3&& !ability.has(Abilities.ObsidianEnabled)){
+            ability.Add(Abilities.ObsidianEnabled,true);
+        }
+        if (uiPayloadC2S.value() == 4  && ability.has(Abilities.FurnaceEnabled)){
+            ability.Remove(Abilities.FurnaceEnabled);
+//            context.player().sendOverlayMessage(Component.literal("button1"));
+        }else if(uiPayloadC2S.value() == 4 &&!ability.has(Abilities.FurnaceEnabled)){
+            ability.Add(Abilities.FurnaceEnabled,true);
         }
         }
     }

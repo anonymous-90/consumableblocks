@@ -4,6 +4,7 @@ import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -44,4 +45,15 @@ public class EdibleFurnace extends Item {
         return super.finishUsingItem(itemStack, level, entity);
     }
 
+    @Override
+    public void onCraftedBy(@NonNull ItemStack itemStack, @NonNull Player player) {
+        Abilities.AbilityData ability = Abilities.get(player);
+        if(ability.has(Abilities.FurnaceUnlocked)){
+            return;
+        }else {
+            ability.Add(Abilities.FurnaceUnlocked,true);
+            ability.Add(Abilities.FurnaceEnabled,true);
+        }
+        super.onCraftedBy(itemStack, player);
+    }
 }

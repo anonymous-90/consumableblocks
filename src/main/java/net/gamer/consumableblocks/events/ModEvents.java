@@ -63,21 +63,6 @@ public class ModEvents {
 //
 //            }
 //        });
-// temporary crafting check
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
-
-            for(ServerPlayer player: server.getPlayerList().getPlayers()){
-                Abilities.AbilityData abilities = Abilities.get(player);
-                if(player.getInventory().contains(ModItems.EdibleFurnace.getDefaultInstance()) && !Abilities.get(player).has(Abilities.FurnaceUnlocked) && !abilities.has(Abilities.FurnaceEnabled)){
-                    Abilities.get(player).Add(Abilities.FurnaceUnlocked,true);
-                    player.sendSystemMessage(Component.literal("furnace unlocked"));
-                    abilities.Add(Abilities.FurnaceEnabled,true);
-                    player.sendSystemMessage(Component.literal("furnace enabled"));
-                } else {
-                    return;
-                }
-            }
-        });
 
 
     }

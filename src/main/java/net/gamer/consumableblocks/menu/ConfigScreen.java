@@ -1,7 +1,9 @@
 package net.gamer.consumableblocks.menu;
 
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.gamer.consumableblocks.item.ModItems;
+import net.gamer.consumableblocks.networking.packet.UiPayloadC2S;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.ObjectSelectionList;
@@ -9,6 +11,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.protocol.game.ClientboundSoundPacket;
 import net.minecraft.world.item.Item;
 import net.minecraft.util.CommonColors;
 import net.minecraft.world.item.ItemStack;
@@ -31,9 +34,9 @@ public class ConfigScreen extends Screen {
         int listHeight = this.height - 90;
         this.list = new BlockList(this.minecraft, listWidth, listHeight, 70, 24);
         this.list.setX((this.width - listWidth) / 2);
-        this.list.addBlock(ModItems.EdibleIce, "Ice", "consumableblocks.edibleice.tooltip", false);
-        this.list.addBlock(ModItems.EdibleSlime, "Slime", "consumableblocks.edibleslime.tooltip", false);
-        this.list.addBlock(ModItems.EdibleObsidian, "Obsidian", "consumableblocks.edibleobsidian.tooltip", false);
+        this.list.addBlock(ModItems.EdibleIce, "Ice", "consumableblocks.edibleice.tooltip", Abilities.get(minecraft.player).has(Abilities.IceEnabled));
+        this.list.addBlock(ModItems.EdibleSlime, "Slime", "consumableblocks.edibleslime.tooltip", Abilities.get(minecraft.player).has(Abilities.SlimeEnabled));
+        this.list.addBlock(ModItems.EdibleObsidian, "Obsidian", "consumableblocks.edibleobsidian.tooltip", Abilities.get(minecraft.player).has(Abilities.ObsidianEnabled));
         this.list.addBlock(ModItems.EdibleFurnace, "Furnace", "consumableblocks.ediblefurnace.tooltip", Abilities.get(minecraft.player).has(Abilities.FurnaceEnabled));
 
 //        Item[] extras = {Items.DIRT, Items.STONE, Items.OAK_LOG, Items.APPLE, Items.DIAMOND, Items.IRON_INGOT, Items.GOLD_INGOT, Items.BREAD, Items.CARROT, Items.POTATO, Items.BEEF, Items.PORKCHOP, Items.CHICKEN, Items.COAL, Items.EMERALD, Items.REDSTONE, Items.SUGAR, Items.WHEAT, Items.EGG, Items.FEATHER};
@@ -102,8 +105,18 @@ public class ConfigScreen extends Screen {
         @Override
         public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
             this.enabled = !this.enabled;
-            if (ConfigScreen.this.minecraft.player != null) {
-                ConfigScreen.this.minecraft.player.sendSystemMessage(Component.literal(this.name + " is now " + (this.enabled ? "ON" : "OFF")));
+            if (ConfigScreen.this.minecraft.player != null && this.name.equals("Ice")) {
+                ClientPlayNetworking.send(new UiPayloadC2S("config",1));
+
+            }  if (ConfigScreen.this.minecraft.player != null && this.name.equals("Slime")) {
+                ClientPlayNetworking.send(new UiPayloadC2S("config",2));
+
+            }  if (ConfigScreen.this.minecraft.player != null && this.name.equals("Obsidian")) {
+                ClientPlayNetworking.send(new UiPayloadC2S("config",3));
+
+            }  if (ConfigScreen.this.minecraft.player != null && this.name.equals("Furnace")) {
+                ClientPlayNetworking.send(new UiPayloadC2S("config",4));
+
             }
             return true;
         }

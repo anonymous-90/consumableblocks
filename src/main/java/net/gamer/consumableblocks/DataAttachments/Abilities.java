@@ -31,6 +31,74 @@ public class Abilities {
                     .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
                     .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"has_furnace")));
 
+// ice
+
+    public static final AttachmentType<Boolean> IceUnlocked = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ice_unlocked"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ice_unlocked")));
+
+    public static final AttachmentType<Boolean> IceEnabled = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ice_enabled"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ice_enabled")));
+
+    public static final AttachmentType<Boolean> HasIce = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"has_ice"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"has_ice")));
+
+    // obsidian
+
+    public static final AttachmentType<Boolean> ObsidianUnlocked = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"obsidian_unlocked"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"obsidian_unlocked")));
+
+    public static final AttachmentType<Boolean> ObsidianEnabled = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"obsidian_enabled"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"obsidian_enabled")));
+
+    public static final AttachmentType<Boolean> HasObsidian = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"has_obsidian"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"has_obsidian")));
+
+    // slime
+
+    public static final AttachmentType<Boolean> SlimeUnlocked = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_unlocked"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_unlocked")));
+
+    public static final AttachmentType<Boolean> SlimeEnabled = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_enabled"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_enabled")));
+
+    public static final AttachmentType<Boolean> HasSlime = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"has_slime"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .buildAndRegister(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"has_slime")));
 
         public static void registerAbilitiesData(){
             ConsumableBlocks.LOGGER.info("registered Abilities Data for" + ConsumableBlocks.MOD_ID );

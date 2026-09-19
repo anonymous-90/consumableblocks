@@ -1,6 +1,7 @@
 package net.gamer.consumableblocks.item.custom;
 
 import net.gamer.consumableblocks.ConsumableBlocks;
+import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -8,6 +9,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -46,5 +48,15 @@ public class EdibleIce extends Item {
             }
         }
         return super.finishUsingItem(itemStack, level, entity);
+    }
+    public void onCraftedBy(@NonNull ItemStack itemStack, @NonNull Player player) {
+        Abilities.AbilityData ability = Abilities.get(player);
+        if(ability.has(Abilities.IceUnlocked)){
+            return;
+        }else {
+            ability.Add(Abilities.IceUnlocked,true);
+            ability.Add(Abilities.IceEnabled,true);
+        }
+        super.onCraftedBy(itemStack, player);
     }
 }
