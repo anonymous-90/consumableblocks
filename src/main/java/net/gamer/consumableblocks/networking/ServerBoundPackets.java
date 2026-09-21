@@ -4,10 +4,8 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.gamer.consumableblocks.ConsumableBlocks;
 import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.gamer.consumableblocks.DataAttachments.Fuel;
-import net.gamer.consumableblocks.networking.packet.SmeltPayloadC2S;
 import net.gamer.consumableblocks.networking.packet.UiPayloadC2S;
 import net.minecraft.advancements.AdvancementHolder;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -19,16 +17,15 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 
-import java.util.Objects;
-
 // on the server
 public class ServerBoundPackets {
-    public static void handleSmeltPayload(SmeltPayloadC2S smeltPayloadC2S, ServerPlayNetworking.Context context) {
+    public static void handleSmeltPayload(ServerPlayNetworking.Context context) {
         if (context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(context.player().getMainHandItem()), context.player().level()).isPresent() && Fuel.get(context.player()).hasFuelAttachment()) {
             var Item = context.player().level().recipeAccess().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(context.player().getMainHandItem()), context.player().level()).get().value().assemble(new SingleRecipeInput(context.player().getMainHandItem())).copy();
-            boolean HasFurnace = context.player().getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(context.server()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "has_furnace")))).isDone();
-            boolean FurnaceEnabled = context.player().getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(context.server()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "furnace_enabled")))).isDone();
-            boolean FurnaceUnlocked = context.player().getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(context.server()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "furnace_unlock")))).isDone();
+            Abilities.AbilityData ability = Abilities.get(context.player());
+            boolean HasFurnace =  ability.has(Abilities.HasFurnace);
+            boolean FurnaceEnabled = ability.has(Abilities.FurnaceEnabled);
+            boolean FurnaceUnlocked = ability.has(Abilities.FurnaceUnlocked);
             if (Fuel.get(context.player()).getCurrentFuel() > 0 && !context.player().isCrouching() && HasFurnace && FurnaceEnabled && FurnaceUnlocked) {
                 context.player().addItem(Item);
                 context.player().getMainHandItem().shrink(1);

@@ -1,5 +1,6 @@
 package net.gamer.consumableblocks.hud;
 import net.gamer.consumableblocks.ConsumableBlocks;
+import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.gamer.consumableblocks.DataAttachments.Fuel;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -15,12 +16,13 @@ public class Fuelbar {
 
     public static void extract(@NonNull GuiGraphicsExtractor graphics) {
         LocalPlayer player = Minecraft.getInstance().player;
+        Abilities.AbilityData ability = Abilities.get(player);
         boolean FuelData = Fuel.get(player).hasFuelAttachment();
         int height = minecraft.getWindow().getGuiScaledHeight();
         int width = minecraft.getWindow().getGuiScaledWidth();
         int x= width/2;
         int y= height;
-        if(FuelData){
+        if(FuelData && ability.has(Abilities.HasFurnace)){
             int redcolor = 0xFFFF0000; // Red
             int whitecolor= 0xFFFFFFFF;
            graphics.blitSprite(RenderPipelines.GUI_TEXTURED,FuelTexture,x - -90,y-17,16,16);

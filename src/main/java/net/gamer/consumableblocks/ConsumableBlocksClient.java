@@ -7,11 +7,9 @@ import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.gamer.consumableblocks.hud.Fuelbar;
 import net.gamer.consumableblocks.keymapping.ModKeymappings;
-import net.gamer.consumableblocks.menu.ConfigScreen;
+import net.gamer.consumableblocks.menu.MainMenu;
 import net.gamer.consumableblocks.networking.packet.SmeltPayloadC2S;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.AbstractScrollArea;
-import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
@@ -33,7 +31,7 @@ public class ConsumableBlocksClient implements ClientModInitializer {
 
         }
         if(ModKeymappings.MenuKey.consumeClick()){
-            client.gui.setScreen(new ConfigScreen(Component.literal("test")));
+            client.gui.setScreen(new MainMenu(Component.literal("test")));
         }
 //                client.player.connection.send(new ClientboundSoundPacket(Holder.direct(SoundEvents.ANVIL_FALL), SoundSource.BLOCKS,client.player.getX(),client.player.getY(),client.player.getZ(),1,1,client.player.getRandom().nextLong()));
 

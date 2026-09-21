@@ -6,6 +6,7 @@ import net.gamer.consumableblocks.item.ModItems;
 import net.gamer.consumableblocks.networking.packet.UiPayloadC2S;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.MultiLineLabel;
 import net.minecraft.client.gui.components.ObjectSelectionList;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -37,7 +38,7 @@ public class ConfigScreen extends Screen {
         this.list.addBlock(ModItems.EdibleIce, "Ice", "consumableblocks.edibleice.tooltip", Abilities.get(minecraft.player).has(Abilities.IceEnabled));
         this.list.addBlock(ModItems.EdibleSlime, "Slime", "consumableblocks.edibleslime.tooltip", Abilities.get(minecraft.player).has(Abilities.SlimeEnabled));
         this.list.addBlock(ModItems.EdibleObsidian, "Obsidian", "consumableblocks.edibleobsidian.tooltip", Abilities.get(minecraft.player).has(Abilities.ObsidianEnabled));
-        this.list.addBlock(ModItems.EdibleFurnace, "Furnace", "consumableblocks.ediblefurnace.tooltip", Abilities.get(minecraft.player).has(Abilities.FurnaceEnabled));
+        this.list.addBlock(ModItems.EdibleFurnace, "Furnace","consumableblocks.ediblefurnace.tooltip", Abilities.get(minecraft.player).has(Abilities.FurnaceEnabled));
 
 //        Item[] extras = {Items.DIRT, Items.STONE, Items.OAK_LOG, Items.APPLE, Items.DIAMOND, Items.IRON_INGOT, Items.GOLD_INGOT, Items.BREAD, Items.CARROT, Items.POTATO, Items.BEEF, Items.PORKCHOP, Items.CHICKEN, Items.COAL, Items.EMERALD, Items.REDSTONE, Items.SUGAR, Items.WHEAT, Items.EGG, Items.FEATHER};
 //        for (Item extra : extras) {

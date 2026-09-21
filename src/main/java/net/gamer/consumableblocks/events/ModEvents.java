@@ -40,7 +40,7 @@ public class ModEvents {
                     Abilities.get(player).Remove(Abilities.FurnaceUnlocked);
                 }
                 if(player.getMainHandItem().getItem() == Items.DIAMOND){
-                    Abilities.get(player).Remove(Abilities.FurnaceEnabled);
+                    Abilities.get(player).Remove(Abilities.HasFurnace);
 
                 }
             }

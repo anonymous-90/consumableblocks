@@ -16,7 +16,7 @@ public class ModPackets {
         registry.register(UiPayloadC2S.TYPE,UiPayloadC2S.STREAM_CODEC);
 
 
-        ServerPlayNetworking.registerGlobalReceiver(SmeltPayloadC2S.TYPE,ServerBoundPackets::handleSmeltPayload);
+        ServerPlayNetworking.registerGlobalReceiver(SmeltPayloadC2S.TYPE, (smeltPayloadC2S, context) -> ServerBoundPackets.handleSmeltPayload(context));
         ServerPlayNetworking.registerGlobalReceiver(UiPayloadC2S.TYPE,ServerBoundPackets::handleUiPayload);
 
 
