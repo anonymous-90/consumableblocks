@@ -1,5 +1,6 @@
 package net.gamer.consumableblocks.menu;
 
+import net.gamer.consumableblocks.menu.help.helpMainMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
@@ -28,7 +29,7 @@ public class MainMenu extends Screen {
 
 
         Button Help = Button.builder(Component.literal("Help"), (btn) -> {
-
+        minecraft.gui.setScreen(new helpMainMenu(Component.literal("help")));
 
         }).bounds(minecraft.getWindow().getGuiScaledWidth()/2 -120,  minecraft.getWindow().getGuiScaledHeight()/2 -38, 120, 20).build();
 

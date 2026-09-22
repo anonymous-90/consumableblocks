@@ -1,18 +1,19 @@
 package net.gamer.consumableblocks.menu;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.gamer.consumableblocks.ConsumableBlocks;
 import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.gamer.consumableblocks.item.ModItems;
 import net.gamer.consumableblocks.networking.packet.UiPayloadC2S;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.components.MultiLineLabel;
-import net.minecraft.client.gui.components.ObjectSelectionList;
+import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
-import net.minecraft.network.protocol.game.ClientboundSoundPacket;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.util.CommonColors;
 import net.minecraft.world.item.ItemStack;
@@ -24,6 +25,7 @@ import org.jspecify.annotations.NonNull;
 public class ConfigScreen extends Screen {
 
     private BlockList list;
+    private static final Identifier test = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/menu_background");
 
     public ConfigScreen(Component title) {
         super(title);
@@ -38,21 +40,21 @@ public class ConfigScreen extends Screen {
         this.list.addBlock(ModItems.EdibleIce, "Ice", "consumableblocks.edibleice.tooltip", Abilities.get(minecraft.player).has(Abilities.IceEnabled));
         this.list.addBlock(ModItems.EdibleSlime, "Slime", "consumableblocks.edibleslime.tooltip", Abilities.get(minecraft.player).has(Abilities.SlimeEnabled));
         this.list.addBlock(ModItems.EdibleObsidian, "Obsidian", "consumableblocks.edibleobsidian.tooltip", Abilities.get(minecraft.player).has(Abilities.ObsidianEnabled));
-        this.list.addBlock(ModItems.EdibleFurnace, "Furnace","consumableblocks.ediblefurnace.tooltip", Abilities.get(minecraft.player).has(Abilities.FurnaceEnabled));
-
-//        Item[] extras = {Items.DIRT, Items.STONE, Items.OAK_LOG, Items.APPLE, Items.DIAMOND, Items.IRON_INGOT, Items.GOLD_INGOT, Items.BREAD, Items.CARROT, Items.POTATO, Items.BEEF, Items.PORKCHOP, Items.CHICKEN, Items.COAL, Items.EMERALD, Items.REDSTONE, Items.SUGAR, Items.WHEAT, Items.EGG, Items.FEATHER};
-//        for (Item extra : extras) {
-//            this.list.addBlock(extra, new ItemStack(extra).getHoverName().getString(), "consumableblocks.edibleice.tooltip");
-//        }
-
+        this.list.addBlock(ModItems.EdibleFurnace, "Furnace","consumableblocks.ediblefurnace.tooltip", Abilities.get(minecraft.player).has(Abilities.FurnaceEnabled));;
+        PlainTextButton back = new PlainTextButton(minecraft.getWindow().getGuiScaledWidth()/2 -10,list.getBottom()+7,20,20,Component.literal("back"),button -> {
+            minecraft.gui.setScreen(new MainMenu(Component.empty()));
+        },font);
         this.addRenderableWidget(this.list);
+        this.addRenderableWidget(back);
     }
 
     @Override
     public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
         super.extractRenderState(graphics, mouseX, mouseY, delta);
         graphics.textWithWordWrap(this.font, FormattedText.of("Turn on or off the ability to consume certain blocks. This will only work if you have crafted the block to unlock it."), (this.width - 220) / 2, 20, 220, CommonColors.WHITE);
+
     }
+
 
     class BlockList extends ObjectSelectionList<BlockEntry> {
 
@@ -67,6 +69,14 @@ public class ConfigScreen extends Screen {
         @Override
         public int getRowWidth() {
             return this.getWidth() - 20;
+        }
+
+        @Override
+        protected void extractListBackground(@NonNull GuiGraphicsExtractor graphics) {
+            super.extractListBackground(graphics);
+            int listWidth = 220;
+            int listHeight = this.height - 90;
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED,test,list.getX(),list.getY(),listWidth,listHeight+90);
         }
     }
 
@@ -103,6 +113,7 @@ public class ConfigScreen extends Screen {
             }
         }
 
+
         @Override
         public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
             this.enabled = !this.enabled;
@@ -122,9 +133,11 @@ public class ConfigScreen extends Screen {
             return true;
         }
 
+
         @Override
         public Component getNarration() {
             return Component.literal(this.name);
         }
     }
+
 }
