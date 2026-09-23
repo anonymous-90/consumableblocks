@@ -44,6 +44,7 @@ public class ConfigScreen extends Screen {
         PlainTextButton back = new PlainTextButton(minecraft.getWindow().getGuiScaledWidth()/2 -10,list.getBottom()+7,20,20,Component.literal("back"),button -> {
             minecraft.gui.setScreen(new MainMenu(Component.empty()));
         },font);
+
         this.addRenderableWidget(this.list);
         this.addRenderableWidget(back);
     }
@@ -55,6 +56,12 @@ public class ConfigScreen extends Screen {
 
     }
 
+    @Override
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+        super.extractBackground(graphics, mouseX, mouseY, a);
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED,test,0,0,minecraft.getWindow().getScreenWidth(),minecraft.getWindow().getScreenHeight());
+
+    }
 
     class BlockList extends ObjectSelectionList<BlockEntry> {
 
