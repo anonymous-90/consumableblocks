@@ -18,10 +18,10 @@ public class ModEvents {
 
     public static void EventRegister(){
         UseItemCallback.EVENT.register((player, level, _) -> {
-            if(player instanceof  ServerPlayer serverPlayer){
-                boolean HasFurnace = serverPlayer.getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(level.getServer()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "has_furnace")))).isDone();
-                boolean FurnaceEnabled = serverPlayer.getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(level.getServer()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "furnace_enabled")))).isDone();
-                boolean FurnaceUnlocked = serverPlayer.getAdvancements().getOrStartProgress(Objects.requireNonNull(Objects.requireNonNull(level.getServer()).getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "furnace_unlock")))).isDone();
+                Abilities.AbilityData ability = Abilities.get(player);
+                boolean HasFurnace = ability.has(Abilities.HasFurnace);
+                boolean FurnaceEnabled = ability.has(Abilities.FurnaceEnabled);
+                boolean FurnaceUnlocked = ability.has(Abilities.FurnaceUnlocked);
                 Fuel.get(player).setMaxFuel(100);
                 if(player.getMainHandItem().getItem() == Items.COAL && Fuel.get(player).getCurrentFuel() != 100 && !player.isCrouching() && HasFurnace && FurnaceEnabled && FurnaceUnlocked){
                     Fuel.get(player).setCurrentFuel(Fuel.get(player).getCurrentFuel()+1);
@@ -43,7 +43,6 @@ public class ModEvents {
                     Abilities.get(player).Remove(Abilities.HasFurnace);
 
                 }
-            }
 
             return InteractionResult.PASS;
         });
