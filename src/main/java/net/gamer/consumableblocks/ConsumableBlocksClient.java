@@ -5,9 +5,9 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
-import net.gamer.consumableblocks.hud.Fuelbar;
 import net.gamer.consumableblocks.keymapping.ModKeymappings;
 import net.gamer.consumableblocks.menu.MainMenu;
+import net.gamer.consumableblocks.hud.ModHud;
 import net.gamer.consumableblocks.networking.packet.SmeltPayloadC2S;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -19,8 +19,10 @@ public class ConsumableBlocksClient implements ClientModInitializer {
     public void onInitializeClient() {
         ModKeymappings.Register();
         ClientTickEvents.END_CLIENT_TICK.register(ConsumableBlocksClient::onEndTick);
-        Fuelbar.RegisterElement();
-        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"test"), (graphics, deltaTracker) -> Fuelbar.extract(graphics));
+        ModHud.registerAbiliyUI();
+        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"fuel_bar"), (graphics, deltaTracker) -> ModHud.Fuelbar(graphics));
+        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"abilities"), (graphics, deltaTracker) -> ModHud.AbilityElements(graphics));
+//        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ability_obsidian"), (graphics, deltaTracker) -> ModAbilitiesUI.ObsidanElement(graphics));
     }
     public static void onEndTick(Minecraft client){
         while (ModKeymappings.SmeltItem.consumeClick()){
