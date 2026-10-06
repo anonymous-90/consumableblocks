@@ -1,6 +1,7 @@
 package net.gamer.consumableblocks.item.custom;
 
 import net.gamer.consumableblocks.ConsumableBlocks;
+import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.network.chat.Component;
@@ -29,18 +30,14 @@ public class FurnaceGeneCleaser extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity) {
-        if(entity instanceof  ServerPlayer player){
-            AdvancementHolder furnace = level.getServer().getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"has_furnace"));
-            if (furnace != null){
-                AdvancementProgress progress = player.getAdvancements().getOrStartProgress(furnace);
-                if(progress.isDone()){
-                    for(String criteria: progress.getCompletedCriteria()) {
-                        player.getAdvancements().revoke(furnace,criteria);
-                    }
-            }
-
+        if (entity instanceof ServerPlayer player) {
+            Abilities.AbilityData ability = Abilities.get(player);
+            if (ability.has(Abilities.HasFurnace)) {
+                ability.Remove(Abilities.HasFurnace);
+            } else {
+                player.sendSystemMessage(Component.literal("you dont have the ability"));
             }
         }
-        return super.finishUsingItem(itemStack, level, entity);
+            return super.finishUsingItem(itemStack, level, entity);
     }
 }

@@ -9,16 +9,6 @@ import net.minecraft.world.item.component.Consumables;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 
 public class ModFoodItems {
-    public static final FoodProperties superAwesomeStickFood = new FoodProperties.Builder()
-            .nutrition(0)
-            .alwaysEdible()
-            .saturationModifier(0.0f)
-            .build();
-    public static final Consumable superAwesomeStickConsumable = Consumables.defaultFood()
-            .animation(ItemUseAnimation.EAT)
-            .consumeSeconds(1)
-            .hasConsumeParticles(true)
-            .build();
     public static final FoodProperties EdibleFood = new FoodProperties.Builder()
             .nutrition(0)
             .alwaysEdible()

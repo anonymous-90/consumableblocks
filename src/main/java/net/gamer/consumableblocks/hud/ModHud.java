@@ -18,16 +18,49 @@ public class ModHud {
     private static final Identifier AbilityObsidian = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/obsidian_ability");;
     private static final Identifier FuelTexture = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/fuel_empty");
 
-    public static void AbilityElements(GuiGraphicsExtractor graphics){
+    public static void FurnaceElement(GuiGraphicsExtractor graphics){
         LocalPlayer player = Minecraft.getInstance().player;
         Abilities.AbilityData ability = Abilities.get(player);
         int width = minecraft.getWindow().getGuiScaledWidth();
+        if(ability.has(Abilities.HasFurnace)){
         graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityFurnace, width -18,0,18,18);
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityIce, width - 18, 20,18,18);
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilitySlime,width-18,40,18,18);
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityObsidian,width-18,60,18,18);
+
+        }
 
 }
+
+public static void IceElement(GuiGraphicsExtractor graphics){
+    LocalPlayer player = Minecraft.getInstance().player;
+    Abilities.AbilityData ability = Abilities.get(player);
+    int width = minecraft.getWindow().getGuiScaledWidth();;
+    if (ability.has(Abilities.HasIce)){
+    graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityIce, width - 18, 20,18,18);
+
+    }
+
+}
+
+public static void SlimeElement(GuiGraphicsExtractor graphics){
+    LocalPlayer player = Minecraft.getInstance().player;
+    Abilities.AbilityData ability = Abilities.get(player);
+    int width = minecraft.getWindow().getGuiScaledWidth();
+    if (ability.has(Abilities.HasSlime)){
+    graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilitySlime,width-18,40,18,18);
+
+    }
+
+}
+
+public static void ObsidianElement(GuiGraphicsExtractor graphics){
+    LocalPlayer player = Minecraft.getInstance().player;
+    Abilities.AbilityData ability = Abilities.get(player);
+    int width = minecraft.getWindow().getGuiScaledWidth();
+    if (ability.has(Abilities.HasObsidian)){
+    graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityObsidian,width-18,60,18,18);
+
+    }
+}
+
 public static void Fuelbar(GuiGraphicsExtractor graphics){
     LocalPlayer player = Minecraft.getInstance().player;
     Abilities.AbilityData ability = Abilities.get(player);

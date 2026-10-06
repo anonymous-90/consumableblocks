@@ -38,13 +38,13 @@ public class EdibleSlime extends Item {
 
     @Override
     public @NonNull ItemStack finishUsingItem(@NonNull ItemStack itemStack, @NonNull Level level, @NonNull LivingEntity entity) {
-//        entity.addEffect(new MobEffectInstance(MobEffects.DARKNESS,200,2,false,true));
-        if (entity instanceof ServerPlayer player && player.level() instanceof ServerLevel serverLevel && player.getAdvancements().getOrStartProgress(Objects.requireNonNull(serverLevel.getServer().getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "slime_enabled")))).isDone()){
-//            player.sendOverlayMessage(Component.literal("hello world"));
-            if (player.getAttributes().hasModifier(Attributes.BOUNCINESS,Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_eaten"))){
+        if (entity instanceof ServerPlayer player){
+            Abilities.AbilityData ability = Abilities.get(player);
+            if (player.getAttributes().hasModifier(Attributes.BOUNCINESS,Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_eaten")) && ability.has(Abilities.HasSlime)){
                 player.sendOverlayMessage(Component.literal("§calready have modifier"));
 
             }else{
+                ability.Add(Abilities.HasSlime,true);
                 Objects.requireNonNull(player.getAttribute(Attributes.BOUNCINESS)).addPermanentModifier(new AttributeModifier(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_eaten"),10.0, AttributeModifier.Operation.ADD_VALUE));
                 player.sendOverlayMessage(Component.literal("§6Bounciness ability Acquired"));
             }

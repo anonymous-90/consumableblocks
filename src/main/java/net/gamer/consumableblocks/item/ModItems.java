@@ -16,7 +16,7 @@ import java.util.function.Function;
 public class ModItems {
 
     public static final Item EdibleIce = registerItems("edible_ice",properties -> new EdibleIce(properties
-            .food(ModFoodItems.superAwesomeStickFood,ModFoodItems.superAwesomeStickConsumable)
+            .food(ModFoodItems.EdibleFood,ModFoodItems.EdibleConsumable)
             .stacksTo(1)));
 
     public static final Item EdibleSlime = registerItems("edible_slime",properties -> new EdibleSlime(properties

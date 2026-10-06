@@ -1,0 +1,20 @@
+package net.gamer.consumableblocks.mixin;
+
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(EnderMan.class)
+
+public class hideMixin {
+    @Inject(at = @At("HEAD"),method = "isBeingStaredBy",cancellable = true)
+    private void isBeingStaredBy(final Player player, CallbackInfoReturnable<Boolean> cir){
+        if(player.isCrouching()){
+            cir.setReturnValue(false);
+        }
+    }
+}

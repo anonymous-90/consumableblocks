@@ -38,11 +38,13 @@ public class EdibleIce extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity) {
-        if(entity instanceof ServerPlayer player && player.level() instanceof ServerLevel serverLevel && player.getAdvancements().getOrStartProgress(Objects.requireNonNull(serverLevel.getServer().getAdvancements().get(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "ice_enabled")))).isDone()){
-            if(player.getAttributes().hasModifier(Attributes.MOVEMENT_SPEED,Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ice_eaten"))){
+        if(entity instanceof ServerPlayer player){
+            Abilities.AbilityData ability = Abilities.get(player);
+            if(ability.has(Abilities.HasIce) ){
                 player.sendOverlayMessage(Component.literal("§calready have modifier"));
             }else {
-                player.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ice_eaten"),0.2000000030, AttributeModifier.Operation.ADD_VALUE));
+                ability.Add(Abilities.HasIce,true);
+                Objects.requireNonNull(player.getAttribute(Attributes.MOVEMENT_SPEED)).addPermanentModifier(new AttributeModifier(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ice_eaten"),0.2000000030, AttributeModifier.Operation.ADD_VALUE));
                 player.sendOverlayMessage(Component.literal("§6Speed Ability Acquired"));
 
             }
