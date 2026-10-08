@@ -20,11 +20,12 @@ public class helpMainMenu extends Screen {
 
 
 //
-        Button Config = Button.builder(Component.literal("Blocks"), (btn) -> {
+        Button blocks = Button.builder(Component.literal("Blocks"), (btn) -> {
+            minecraft.gui.setScreen(new blocksScreen(Component.literal("help blocks")));
 
         }).bounds( minecraft.getWindow().getGuiScaledWidth()/2 -120,  minecraft.getWindow().getGuiScaledHeight()/2 -70, 120, 20).build();
 
-        Button Credits = Button.builder(Component.literal("Abilities"), (btn) -> {
+        Button abilities = Button.builder(Component.literal("Abilities"), (btn) -> {
 
 
         }).bounds(minecraft.getWindow().getGuiScaledWidth()/2 +1,  minecraft.getWindow().getGuiScaledHeight()/2 -70, 120, 20).build();
@@ -34,8 +35,8 @@ public class helpMainMenu extends Screen {
         minecraft.gui.setScreen(new MainMenu(Component.empty()));
 
         }).bounds(minecraft.getWindow().getGuiScaledWidth()/2 -60,  minecraft.getWindow().getGuiScaledHeight()/2 -47, 120, 20).build();
-        this.addRenderableWidget(Config);
-        this.addRenderableWidget(Credits);
+        this.addRenderableWidget(blocks);
+        this.addRenderableWidget(abilities);
         this.addRenderableWidget(Back);
     }
 

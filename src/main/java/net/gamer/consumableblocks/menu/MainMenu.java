@@ -23,7 +23,7 @@ public class MainMenu extends Screen {
         }).bounds(minecraft.getWindow().getGuiScaledWidth()/2 -120,  minecraft.getWindow().getGuiScaledHeight()/2 -60, 120, 20).build();
 
         Button Credits = Button.builder(Component.literal("Credits"), (btn) -> {
-
+        minecraft.gui.setScreen((new credits(Component.empty())));
 
         }).bounds(minecraft.getWindow().getGuiScaledWidth()/2 +1,  minecraft.getWindow().getGuiScaledHeight()/2 -60, 120, 20).build();
 
