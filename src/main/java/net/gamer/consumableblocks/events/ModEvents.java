@@ -35,13 +35,8 @@ public class ModEvents {
 
 
                 }
-                if(player.getMainHandItem().getItem() == Items.STICK){
-//                    player.sendOverlayMessage(Component.literal("CurrentFuel " +Fuel.get(player).getCurrentFuel()));
-                    Abilities.get(player).Remove(Abilities.FurnaceUnlocked);
-                }
-                if(player.getMainHandItem().getItem() == Items.DIAMOND){
-                    Abilities.get(player).Remove(Abilities.HasFurnace);
-
+                if (player.getMainHandItem().getItem() == Items.STICK){
+                    ability.Remove(Abilities.CurrentAbilityCount);
                 }
 
             return InteractionResult.PASS;

@@ -37,6 +37,14 @@ public class FurnaceGeneCleaser extends Item {
             } else {
                 player.sendSystemMessage(Component.literal("you dont have the ability"));
             }
+            if (ability.getCurrentCount() == 0){
+                player.sendSystemMessage(Component.literal("no abilities to remove "));
+
+            }
+            if (ability.getCurrentCount() > 0){
+                ability.decrementCurrentCount(1);
+
+            }
         }
             return super.finishUsingItem(itemStack, level, entity);
     }

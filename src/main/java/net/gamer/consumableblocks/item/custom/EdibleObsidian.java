@@ -3,6 +3,8 @@ package net.gamer.consumableblocks.item.custom;
 import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -34,12 +36,13 @@ public class EdibleObsidian extends Item {
     public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity entity) {
         if(entity instanceof ServerPlayer player){
             Abilities.AbilityData ability = Abilities.get(player);
-            if(!ability.has(Abilities.HasObsidian)){
+            if(!ability.has(Abilities.HasObsidian) && ability.getCurrentCount() < 3){
                 ability.Add(Abilities.HasObsidian,true);
+                ability.setCurrentCount(ability.getCurrentCount() +1 );
                 // add modifier/ability when you have it
                 player.sendOverlayMessage(Component.literal("§6 Ability Acquired"));
 
-            }else {
+            }else if(ability.has(Abilities.HasObsidian)) {
                 player.sendOverlayMessage(Component.literal("§calready have modifier"));
 
             }
@@ -47,6 +50,7 @@ public class EdibleObsidian extends Item {
         return super.finishUsingItem(itemStack, level, entity);
     }
 
+    @Override
     public void onCraftedBy(@NonNull ItemStack itemStack, @NonNull Player player) {
         Abilities.AbilityData ability = Abilities.get(player);
         if(ability.has(Abilities.ObsidianUnlocked)){
@@ -56,5 +60,15 @@ public class EdibleObsidian extends Item {
             ability.Add(Abilities.ObsidianEnabled,true);
         }
         super.onCraftedBy(itemStack, player);
+    }
+
+    @Override
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+        Abilities.AbilityData ability = Abilities.get(player);
+        if (ability.getCurrentCount() == 3){
+            player.sendSystemMessage(Component.literal("slots full"));
+            return InteractionResult.FAIL;
+        }
+        return super.use(level, player, hand);
     }
 }

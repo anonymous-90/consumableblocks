@@ -3,6 +3,8 @@ package net.gamer.consumableblocks.item.custom;
 import net.gamer.consumableblocks.DataAttachments.Abilities;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -33,14 +35,17 @@ public class EdibleFurnace extends Item {
     @Override
     public ItemStack finishUsingItem(@NonNull ItemStack itemStack, @NonNull Level level, @NonNull LivingEntity entity) {
         if(entity instanceof  ServerPlayer player){
-            if(!Abilities.get(player).has(Abilities.HasFurnace)){
-                Abilities.get(player).Add(Abilities.HasFurnace,true);
+            Abilities.AbilityData ability = Abilities.get(player);
+            if(!ability.has(Abilities.HasFurnace) && ability.getCurrentCount() < 3){
+                ability.Add(Abilities.HasFurnace,true);
+                ability.setCurrentCount(ability.getCurrentCount() +1);
                 player.sendOverlayMessage(Component.literal("§6Smelting Ability Acquired"));
 
-            }else if (Abilities.get(player).has(Abilities.HasFurnace)){
+            }else if (ability.has(Abilities.HasFurnace)){
                 player.sendOverlayMessage(Component.literal("§cAlready have modifier"));
 
             }
+
         }
         return super.finishUsingItem(itemStack, level, entity);
     }
@@ -55,5 +60,13 @@ public class EdibleFurnace extends Item {
             ability.Add(Abilities.FurnaceEnabled,true);
         }
         super.onCraftedBy(itemStack, player);
+    }
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+        Abilities.AbilityData ability = Abilities.get(player);
+        if (ability.getCurrentCount() == 3){
+            player.sendSystemMessage(Component.literal("slots full"));
+            return InteractionResult.FAIL;
+        }
+        return super.use(level, player, hand);
     }
 }

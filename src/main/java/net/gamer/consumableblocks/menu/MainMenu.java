@@ -1,13 +1,20 @@
 package net.gamer.consumableblocks.menu;
 
+import net.gamer.consumableblocks.menu.help.blocksScreen;
 import net.gamer.consumableblocks.menu.help.helpMainMenu;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.util.CommonColors;
+import net.minecraft.util.Util;
 import org.jspecify.annotations.NonNull;
+
+import java.awt.desktop.OpenURIEvent;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class MainMenu extends Screen {
     public MainMenu(Component title) {
@@ -34,7 +41,7 @@ public class MainMenu extends Screen {
         }).bounds(minecraft.getWindow().getGuiScaledWidth()/2 -120,  minecraft.getWindow().getGuiScaledHeight()/2 -38, 120, 20).build();
 
         Button Blocksuggestions = Button.builder(Component.literal("Block Suggestions"), (btn) -> {
-
+        minecraft.gui.setScreen(new BlockSuggetionMenu(Component.empty()));
 
         }).bounds(minecraft.getWindow().getGuiScaledWidth()/2 +1,  minecraft.getWindow().getGuiScaledHeight()/2 -38, 120, 20).build();
         this.addRenderableWidget(Config);

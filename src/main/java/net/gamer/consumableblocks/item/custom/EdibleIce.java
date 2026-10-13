@@ -6,6 +6,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -42,9 +44,10 @@ public class EdibleIce extends Item {
             Abilities.AbilityData ability = Abilities.get(player);
             if(ability.has(Abilities.HasIce) ){
                 player.sendOverlayMessage(Component.literal("§calready have modifier"));
-            }else {
+            }else if(!ability.has(Abilities.HasIce) && ability.getCurrentCount() < 3){
                 ability.Add(Abilities.HasIce,true);
                 Objects.requireNonNull(player.getAttribute(Attributes.MOVEMENT_SPEED)).addPermanentModifier(new AttributeModifier(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ice_eaten"),0.2000000030, AttributeModifier.Operation.ADD_VALUE));
+                ability.setCurrentCount(ability.getCurrentCount() +1);
                 player.sendOverlayMessage(Component.literal("§6Speed Ability Acquired"));
 
             }
@@ -60,5 +63,13 @@ public class EdibleIce extends Item {
             ability.Add(Abilities.IceEnabled,true);
         }
         super.onCraftedBy(itemStack, player);
+    }
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+        Abilities.AbilityData ability = Abilities.get(player);
+        if (ability.getCurrentCount() == 3){
+            player.sendSystemMessage(Component.literal("slots full"));
+            return InteractionResult.FAIL;
+        }
+        return super.use(level, player, hand);
     }
 }

@@ -27,9 +27,17 @@ public class IceGeneCleaser extends Item {
             Abilities.AbilityData ability = Abilities.get(player);
             if (ability.has(Abilities.HasIce)) {
                 ability.Remove(Abilities.HasIce);
-                Objects.requireNonNull(player.getAttributes().getInstance(Attributes.MOVEMENT_SPEED)).removeModifier(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "ice_eaten"));
+                Objects.requireNonNull(player.getAttributes().getInstance(Attributes.MOVEMENT_SPEED)).removeModifier(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "ice_eaten"));;
             } else {
                 player.sendSystemMessage(Component.literal("you dont have the ability"));
+            }
+            if (ability.getCurrentCount() == 0){
+                player.sendSystemMessage(Component.literal("no abilities to remove "));
+
+            }
+            if (ability.getCurrentCount() > 0){
+                ability.decrementCurrentCount(1);
+
             }
 
         }
