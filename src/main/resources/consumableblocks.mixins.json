@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_25",
   "mixins": [
     "ExampleMixin",
-    "hideMixin"
+    "hideMixin",
+    "noExplosiondamageMixin"
   ],
   "injectors": {
     "defaultRequire": 1
