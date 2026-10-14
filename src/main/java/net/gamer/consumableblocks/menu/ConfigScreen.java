@@ -43,6 +43,7 @@ public class ConfigScreen extends Screen {
         this.list.addBlock(ModItems.EdibleSlime, "Slime", "consumableblocks.edibleslime.tooltip", Abilities.get(minecraft.player).has(Abilities.SlimeEnabled));
         this.list.addBlock(ModItems.EdibleObsidian, "Obsidian", "consumableblocks.edibleobsidian.tooltip", Abilities.get(minecraft.player).has(Abilities.ObsidianEnabled));
         this.list.addBlock(ModItems.EdibleFurnace, "Furnace","consumableblocks.ediblefurnace.tooltip", Abilities.get(minecraft.player).has(Abilities.FurnaceEnabled));;
+        this.list.addBlock(ModItems.EdibleCarvedPumpkin, "Carved pumpkin","consumableblocks.ediblefurnace.tooltip", Abilities.get(minecraft.player).has(Abilities.FurnaceEnabled));;
         Button back = Button.builder(Component.empty(),button -> {
             minecraft.gui.setScreen(new MainMenu(Component.empty()));
         }).bounds(minecraft.getWindow().getGuiScaledWidth()/2 -10,list.getBottom()+7,20,20).build();

@@ -63,6 +63,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .group("ConsumableBlocks")
                         .save(output);
 
+              shaped(RecipeCategory.MISC,ModItems.EdibleCarvedPumpkin,1)
+                        .pattern(" x ")
+                        .pattern(" o ")
+                        .define('x', Items.EXPERIENCE_BOTTLE)
+                        .define('o',Items.CARVED_PUMPKIN)
+                        .unlockedBy(getHasName(Items.CARVED_PUMPKIN),has(Items.CARVED_PUMPKIN))
+                        .group("ConsumableBlocks")
+                        .save(output);
+
               // gene cleasers
               shaped(RecipeCategory.MISC,ModItems.FurnaceGeneCleanser,1)
                         .pattern(" b ")
