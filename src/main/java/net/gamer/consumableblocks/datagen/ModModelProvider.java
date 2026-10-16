@@ -29,5 +29,6 @@ itemModelGenerators.generateFlatItem(ModItems.SlimeGeneCleanser,ModelTemplates.F
 itemModelGenerators.generateFlatItem(ModItems.ObsidianGeneCleanser,ModelTemplates.FLAT_ITEM);
 itemModelGenerators.generateFlatItem(ModItems.FurnaceGeneCleanser,ModelTemplates.FLAT_ITEM);
 itemModelGenerators.generateFlatItem(ModItems.EdibleCarvedPumpkin,ModelTemplates.FLAT_ITEM);
+itemModelGenerators.generateFlatItem(ModItems.CarvedPumpkinGeneCleanser,ModelTemplates.FLAT_ITEM);
     }
 }

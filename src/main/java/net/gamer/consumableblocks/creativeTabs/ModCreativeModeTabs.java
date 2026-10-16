@@ -19,11 +19,12 @@ public static final CreativeModeTab ItemsTab = Registry.register(BuiltInRegistri
                     output.accept(ModItems.EdibleSlime);
                     output.accept(ModItems.EdibleFurnace);
                     output.accept(ModItems.EdibleObsidian);
+                    output.accept(ModItems.EdibleCarvedPumpkin);
                     output.accept(ModItems.IceGeneCleanser);
                     output.accept(ModItems.ObsidianGeneCleanser);
                     output.accept(ModItems.SlimeGeneCleanser);
                     output.accept(ModItems.FurnaceGeneCleanser);
-                    output.accept(ModItems.EdibleCarvedPumpkin);
+                    output.accept(ModItems.CarvedPumpkinGeneCleanser);
                 })
         .build());
 

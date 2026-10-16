@@ -85,6 +85,18 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .save(output);
 
 
+              shaped(RecipeCategory.MISC,ModItems.CarvedPumpkinGeneCleanser,1)
+                        .pattern(" b ")
+                        .pattern(" e ")
+                        .pattern(" w ")
+                        .define('b', Items.CARVED_PUMPKIN)
+                        .define('e',Items.GLASS_BOTTLE)
+                        .define('w',Items.WATER_BUCKET)
+                        .unlockedBy(getHasName(Items.CARVED_PUMPKIN),has(Items.CARVED_PUMPKIN))
+                        .group("ConsumableBlocks")
+                        .save(output);
+
+
 
               shaped(RecipeCategory.MISC,ModItems.IceGeneCleanser,1)
                         .pattern(" b ")

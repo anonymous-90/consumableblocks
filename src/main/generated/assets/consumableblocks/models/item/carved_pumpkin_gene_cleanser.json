@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "consumableblocks:item/carved_pumpkin_gene_cleanser"
+  }
+}

@@ -119,6 +119,31 @@ public class Abilities {
                     .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
                     .copyOnDeath()
                     );
+    // Carved Pumpkin
+
+    public static final AttachmentType<Boolean> CarvedPumpkinUnlocked = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"carved_pumpkin_unlocked"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .copyOnDeath()
+                    );
+
+    public static final AttachmentType<Boolean> CarvedPumpkinEnabled = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"carved_pumpkin_enabled"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .copyOnDeath()
+                    );
+
+    public static final AttachmentType<Boolean> HasCarvedPumpkin = AttachmentRegistry.create(
+            Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"has_carved_pumpkin"),
+            booleanBuilder -> booleanBuilder
+                    .persistent(Codec.BOOL)
+                    .syncWith(ByteBufCodecs.BOOL,AttachmentSyncPredicate.targetOnly())
+                    .copyOnDeath()
+                    );
 
         public static void registerAbilitiesData(){
             ConsumableBlocks.LOGGER.info("registered Abilities Data for" + ConsumableBlocks.MOD_ID );
@@ -149,6 +174,6 @@ public class Abilities {
             this.target.modifyAttached(CurrentAbilityCount, currentabilityCount -> currentabilityCount - value);
         }
 
-    }
+     }
 
 }

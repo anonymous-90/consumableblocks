@@ -37,6 +37,7 @@ public class blocksScreen extends Screen {
         this.list.addBlock(ModItems.EdibleSlime, "Slime", "makes you bouncy Until you drink the gene cleanser To gain the ability back you must eat the block again");
         this.list.addBlock(ModItems.EdibleObsidian, "Obsidian", "gives you explosion knockback resistance Until you drink the gene cleanser To gain the ability back you must eat the block again");
         this.list.addBlock(ModItems.EdibleFurnace, "Furnace", "smelt items on right Click as long as you have fuel.Until you drink the gene cleanser.To gain the ability back you must eat the block again");
+        this.list.addBlock(ModItems.EdibleCarvedPumpkin, "Cavrved Pumpkin", "Hides you from the endermen's gaze");
         Button back = Button.builder(Component.empty(),button -> {
             minecraft.gui.setScreen(new helpMainMenu(Component.empty()));
         }).bounds(minecraft.getWindow().getGuiScaledWidth()/2 -10,list.getBottom()+7,20,20).build();

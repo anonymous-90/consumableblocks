@@ -28,7 +28,7 @@ public class EdibleCarvedPumpkin extends Item {
 
     @Override
     public void appendHoverText(@NonNull ItemStack itemStack, @NonNull TooltipContext context, @NonNull TooltipDisplay display, Consumer<Component> builder, @NonNull TooltipFlag tooltipFlag) {
-       builder.accept(Component.translatable("consumableblocks.ediblefurnace.tooltip"));
+       builder.accept(Component.translatable("consumableblocks.ediblecarved_pumpkin.tooltip"));
         super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
     }
 
@@ -36,7 +36,15 @@ public class EdibleCarvedPumpkin extends Item {
     public ItemStack finishUsingItem(@NonNull ItemStack itemStack, @NonNull Level level, @NonNull LivingEntity entity) {
         if(entity instanceof  ServerPlayer player){
             Abilities.AbilityData ability = Abilities.get(player);
+            if(!ability.has(Abilities.HasCarvedPumpkin) && ability.getCurrentCount() < 3){
+                ability.Add(Abilities.HasCarvedPumpkin,true);
+                ability.setCurrentCount(ability.getCurrentCount() +1);
+                player.sendOverlayMessage(Component.literal("§6Hide Ability Acquired"));
 
+            }else if (ability.has(Abilities.HasFurnace)){
+                player.sendOverlayMessage(Component.literal("§cAlready haas ability "));
+
+            }
         }
         return super.finishUsingItem(itemStack, level, entity);
     }
@@ -44,6 +52,12 @@ public class EdibleCarvedPumpkin extends Item {
     @Override
     public void onCraftedBy(@NonNull ItemStack itemStack, @NonNull Player player) {
         Abilities.AbilityData ability = Abilities.get(player);
+        if(ability.has(Abilities.CarvedPumpkinUnlocked)){
+            return;
+        }else {
+            ability.Add(Abilities.CarvedPumpkinUnlocked,true);
+            ability.Add(Abilities.CarvedPumpkinEnabled,true);
+        }
         super.onCraftedBy(itemStack, player);
     }
     public InteractionResult use(Level level, Player player, InteractionHand hand) {

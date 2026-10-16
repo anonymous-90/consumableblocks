@@ -51,6 +51,10 @@ public static final Item EdibleObsidian = registerItems("edible_obsidian",proper
             .food(ModFoodItems.EdibleFood,ModFoodItems.EdibleConsumable)
             .stacksTo(1)));
 
+    public static  final Item CarvedPumpkinGeneCleanser = registerItems("carved_pumpkin_gene_cleanser",properties -> new CarvedPumpkinGeneCleaser(properties
+            .food(ModFoodItems.GeneCleaserFood,ModFoodItems.GeneCleaserConsumable)
+            .stacksTo(1)));
+
     private static Item registerItems(String name, Function<Item.Properties,Item> function){
        return Registry.register(BuiltInRegistries.ITEM, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,name),
                function.apply(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,name)))));

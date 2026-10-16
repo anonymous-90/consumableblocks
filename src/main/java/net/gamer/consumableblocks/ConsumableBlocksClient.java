@@ -21,11 +21,7 @@ public class ConsumableBlocksClient implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(ConsumableBlocksClient::onEndTick);
         ModHud.registerAbiliyUI();
         HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"fuel_bar"), (graphics, deltaTracker) -> ModHud.Fuelbar(graphics));
-        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ice_element"), (graphics, deltaTracker) -> ModHud.IceElement(graphics));
-        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_element"), (graphics, deltaTracker) -> ModHud.SlimeElement(graphics));
-        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"furnace_element"), (graphics, deltaTracker) -> ModHud.FurnaceElement(graphics));
-        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"obsidian_element"), (graphics, deltaTracker) -> ModHud.ObsidianElement(graphics));
-//        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"ability_obsidian"), (graphics, deltaTracker) -> ModAbilitiesUI.ObsidanElement(graphics));
+        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT,Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"abilities"),((graphics, deltaTracker) -> ModHud.Abilities(graphics)));
     }
     public static void onEndTick(Minecraft client){
         while (ModKeymappings.SmeltItem.consumeClick()){

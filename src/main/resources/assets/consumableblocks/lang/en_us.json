@@ -8,6 +8,7 @@
   "item.consumableblocks.slime_gene_cleanser": "Slime Gene Cleanser",
   "item.consumableblocks.obsidian_gene_cleanser": "Obsidian Gene Cleanser",
   "item.consumableblocks.furnace_gene_cleanser": "Furnace Gene Cleanser",
+  "item.consumableblocks.carved_pumpkin_gene_cleanser": "Carved Pumpkin Gene Cleanser",
   "consumableblocks.edibleslime.tooltip": "§aMakes You Bouncy",
   "consumableblocks.edibleice.tooltip": "§aIncreases Your Speed",
   "consumableblocks.ediblefurnace.tooltip": "§aGives You The Ability To Smelt Items",
@@ -19,6 +20,8 @@
   "item.consumableblocks.edible_carved_pumpkin": "§5Edible Pumpkin",
   "key.consumable_blocks_key": "Smelt Item",
   "key.consumable_blocks_menu.key": "Consumable Blocks Menu",
-  "config.description": "Turn on or off the ability to consume certain blocks.Also Check If the block is enabled §lthis will only work if you have crafted the block To unlock it"
+  "config.description": "Turn on or off the ability to consume certain blocks.Also Check If the block is enabled §lthis will only work if you have crafted the block To unlock it",
+  "consumableblocks.ediblecarved_pumpkin.tooltip": "§aHides You From The Endermen's Gaze",
+  "consumableblocks.carved_pumpkin_genecleaser.tooltip": "Removes The Carved Pumpkin Ability From DNA"
 
 }

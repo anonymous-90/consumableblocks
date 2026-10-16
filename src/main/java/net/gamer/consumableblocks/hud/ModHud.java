@@ -15,51 +15,47 @@ public class ModHud {
     private static final Identifier AbilityFurnace = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/furnace_ability");;
     private static final Identifier AbilityIce = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/ice_ability");;
     private static final Identifier AbilitySlime = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/slime_ability");;
-    private static final Identifier AbilityObsidian = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/obsidian_ability");;
+    private static final Identifier AbilityObsidian = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/obsidian_ability");
+    private static final Identifier AbilityCarvedPumpkind = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/carved_pumpkin_ability");
     private static final Identifier FuelTexture = Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"hud/fuel_empty");
 
-    public static void FurnaceElement(GuiGraphicsExtractor graphics){
+
+    public static void Abilities(GuiGraphicsExtractor graphics){
         LocalPlayer player = Minecraft.getInstance().player;
         Abilities.AbilityData ability = Abilities.get(player);
         int width = minecraft.getWindow().getGuiScaledWidth();
+        int count = 0;
         if(ability.has(Abilities.HasFurnace)){
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityFurnace, width -18,0,18,18);
+            count ++;
+//            minecraft.player.sendSystemMessage(Component.literal(String.valueOf(count)));
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityFurnace, width -18,20* count,18,18);
 
         }
+        if (ability.has(Abilities.HasIce)){
+            count ++;
+//            minecraft.player.sendSystemMessage(Component.literal(String.valueOf(count)));
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityIce, width - 18, 20* count,18,18);
 
-}
+        }
+        if (ability.has(Abilities.HasSlime)){
+            count ++;
+//            minecraft.player.sendSystemMessage(Component.literal(String.valueOf(count)));
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilitySlime,width-18,20* count,18,18);
 
-public static void IceElement(GuiGraphicsExtractor graphics){
-    LocalPlayer player = Minecraft.getInstance().player;
-    Abilities.AbilityData ability = Abilities.get(player);
-    int width = minecraft.getWindow().getGuiScaledWidth();;
-    if (ability.has(Abilities.HasIce)){
-    graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityIce, width - 18, 20,18,18);
+        }
+        if (ability.has(Abilities.HasObsidian)){
+            count ++;
+//            minecraft.player.sendSystemMessage(Component.literal(String.valueOf(count)));
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityObsidian,width-18,20 * count,18,18);
 
+        }
+        if (ability.has(Abilities.HasCarvedPumpkin)){
+            count ++;
+//            minecraft.player.sendSystemMessage(Component.literal(String.valueOf(count)));
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityCarvedPumpkind,width-18,20 * count,18,18);
+
+        }
     }
-
-}
-
-public static void SlimeElement(GuiGraphicsExtractor graphics){
-    LocalPlayer player = Minecraft.getInstance().player;
-    Abilities.AbilityData ability = Abilities.get(player);
-    int width = minecraft.getWindow().getGuiScaledWidth();
-    if (ability.has(Abilities.HasSlime)){
-    graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilitySlime,width-18,40,18,18);
-
-    }
-
-}
-
-public static void ObsidianElement(GuiGraphicsExtractor graphics){
-    LocalPlayer player = Minecraft.getInstance().player;
-    Abilities.AbilityData ability = Abilities.get(player);
-    int width = minecraft.getWindow().getGuiScaledWidth();
-    if (ability.has(Abilities.HasObsidian)){
-    graphics.blitSprite(RenderPipelines.GUI_TEXTURED,AbilityObsidian,width-18,60,18,18);
-
-    }
-}
 
 public static void Fuelbar(GuiGraphicsExtractor graphics){
     LocalPlayer player = Minecraft.getInstance().player;
