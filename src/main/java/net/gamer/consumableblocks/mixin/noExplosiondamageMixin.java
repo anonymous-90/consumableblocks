@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ExplosionDamageCalculator.class)
-public class noExplosiondamageMixin {
+public abstract class noExplosiondamageMixin {
     @Inject(at = @At("HEAD"),method = "shouldDamageEntity",cancellable = true)
     public void shouldDamageEntity(Explosion explosion, Entity entity, CallbackInfoReturnable<Boolean> cir){
         if (entity instanceof ServerPlayer player && Abilities.get(player).has(Abilities.HasObsidian)){
