@@ -11,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EnderMan.class)
 
-public abstract class hideMixin {
+public abstract class HideMixin {
     @Inject(at = @At("HEAD"),method = "isBeingStaredBy",cancellable = true)
-    private void isBeingStaredBy(final Player player, CallbackInfoReturnable<Boolean> cir){
+    private void canBeSeen(final Player player, CallbackInfoReturnable<Boolean> cir){
         Abilities.AbilityData ability = Abilities.get(player);
         if(ability.has(Abilities.HasCarvedPumpkin)){
             cir.setReturnValue(false);

@@ -1,6 +1,7 @@
 package net.gamer.consumableblocks.mixin;
 
 import net.gamer.consumableblocks.DataAttachments.Abilities;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Explosion;
@@ -13,9 +14,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ExplosionDamageCalculator.class)
 public abstract class noExplosiondamageMixin {
     @Inject(at = @At("HEAD"),method = "shouldDamageEntity",cancellable = true)
-    public void shouldDamageEntity(Explosion explosion, Entity entity, CallbackInfoReturnable<Boolean> cir){
+    private void canDamageEntity(Explosion explosion, Entity entity, CallbackInfoReturnable<Boolean> cir){
         if (entity instanceof ServerPlayer player && Abilities.get(player).has(Abilities.HasObsidian)){
+            player.sendSystemMessage(Component.literal("test"));
             cir.setReturnValue(false);
+
         }
     }
 }
