@@ -8,9 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 
@@ -34,6 +32,7 @@ public class FurnaceGeneCleaser extends Item {
             Abilities.AbilityData ability = Abilities.get(player);
             if (ability.has(Abilities.HasFurnace)) {
                 ability.Remove(Abilities.HasFurnace);
+                player.setItemInHand(player.getUsedItemHand(),Items.GLASS_BOTTLE.getDefaultInstance());
             } else {
                 player.sendSystemMessage(Component.literal("you dont have the ability"));
             }

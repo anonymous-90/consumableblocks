@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -15,7 +16,6 @@ public class CarvedPumpkinGeneCleaser extends Item {
     public CarvedPumpkinGeneCleaser(Properties properties) {
         super(properties);
     }
-
 
     @Override
     public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
@@ -29,6 +29,8 @@ public class CarvedPumpkinGeneCleaser extends Item {
         Abilities.AbilityData ability = Abilities.get(entity);
         if(ability.has(Abilities.HasCarvedPumpkin)){
             ability.Remove(Abilities.HasCarvedPumpkin);
+            player.setItemInHand(player.getUsedItemHand(), Items.GLASS_BOTTLE.getDefaultInstance());
+
         }else {
             player.sendSystemMessage(Component.literal("you dont have the ability"));
         }

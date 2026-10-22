@@ -71,27 +71,28 @@ public class ServerBoundPackets {
         assert player.gui.screen() != null;
         if (uiPayloadC2S.value() == 1  && ability.has(Abilities.IceEnabled)){
             ability.Remove(Abilities.IceEnabled);
-//            context.player().sendOverlayMessage(Component.literal("button1"));
             }else if(uiPayloadC2S.value() == 1 &&!ability.has(Abilities.IceEnabled)){
                 ability.Add(Abilities.IceEnabled,true);
         }
         if (uiPayloadC2S.value() == 2 && ability.has(Abilities.SlimeEnabled)){
             ability.Remove(Abilities.SlimeEnabled);
-//            context.player().sendOverlayMessage(Component.literal("button1"));
         }else if(uiPayloadC2S.value() == 2&&!ability.has(Abilities.SlimeEnabled)){
             ability.Add(Abilities.SlimeEnabled,true);
         }
         if (uiPayloadC2S.value() == 3  && ability.has(Abilities.ObsidianEnabled)){
             ability.Remove(Abilities.ObsidianEnabled);
-//            context.player().sendOverlayMessage(Component.literal("button1"));
         }else if(uiPayloadC2S.value() ==  3&& !ability.has(Abilities.ObsidianEnabled)){
             ability.Add(Abilities.ObsidianEnabled,true);
         }
         if (uiPayloadC2S.value() == 4  && ability.has(Abilities.FurnaceEnabled)){
             ability.Remove(Abilities.FurnaceEnabled);
-//            context.player().sendOverlayMessage(Component.literal("button1"));
         }else if(uiPayloadC2S.value() == 4 &&!ability.has(Abilities.FurnaceEnabled)){
             ability.Add(Abilities.FurnaceEnabled,true);
+        }
+        if (uiPayloadC2S.value() == 5  && ability.has(Abilities.CarvedPumpkinEnabled)){
+            ability.Remove(Abilities.CarvedPumpkinEnabled);
+        }else if(uiPayloadC2S.value() == 5 &&!ability.has(Abilities.CarvedPumpkinEnabled)){
+            ability.Add(Abilities.CarvedPumpkinEnabled,true);
         }
         }
     }

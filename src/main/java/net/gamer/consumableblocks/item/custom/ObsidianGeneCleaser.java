@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -29,6 +30,8 @@ public class ObsidianGeneCleaser extends Item {
         Abilities.AbilityData ability = Abilities.get(entity);
         if(ability.has(Abilities.HasObsidian)){
             ability.Remove(Abilities.HasObsidian);
+            player.setItemInHand(player.getUsedItemHand(), Items.GLASS_BOTTLE.getDefaultInstance());
+
         }else {
             player.sendSystemMessage(Component.literal("you dont have the ability"));
         }

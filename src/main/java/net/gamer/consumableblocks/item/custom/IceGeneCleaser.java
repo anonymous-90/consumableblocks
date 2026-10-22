@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -27,7 +28,9 @@ public class IceGeneCleaser extends Item {
             Abilities.AbilityData ability = Abilities.get(player);
             if (ability.has(Abilities.HasIce)) {
                 ability.Remove(Abilities.HasIce);
-                Objects.requireNonNull(player.getAttributes().getInstance(Attributes.MOVEMENT_SPEED)).removeModifier(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "ice_eaten"));;
+                Objects.requireNonNull(player.getAttributes().getInstance(Attributes.MOVEMENT_SPEED)).removeModifier(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID, "ice_eaten"));
+                player.setItemInHand(player.getUsedItemHand(), Items.GLASS_BOTTLE.getDefaultInstance());
+                ;
             } else {
                 player.sendSystemMessage(Component.literal("you dont have the ability"));
             }

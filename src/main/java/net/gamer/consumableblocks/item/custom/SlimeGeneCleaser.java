@@ -9,6 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
@@ -28,6 +29,8 @@ public class SlimeGeneCleaser extends Item {
         if(ability.has(Abilities.HasSlime)){
             ability.Remove(Abilities.HasSlime);
             Objects.requireNonNull(player.getAttributes().getInstance(Attributes.BOUNCINESS)).removeModifier(Identifier.fromNamespaceAndPath(ConsumableBlocks.MOD_ID,"slime_eaten"));
+            player.setItemInHand(player.getUsedItemHand(), Items.GLASS_BOTTLE.getDefaultInstance());
+
         }else {
             player.sendSystemMessage(Component.literal("you dont have the ability"));
         }

@@ -11,6 +11,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.*;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
@@ -150,6 +151,9 @@ public class ConfigScreen extends Screen {
 
             }  if (ConfigScreen.this.minecraft.player != null && this.name.equals("Furnace")) {
                 ClientPlayNetworking.send(new UiPayloadC2S("config",4));
+
+            }  if (ConfigScreen.this.minecraft.player != null && this.name.equals("Carved pumpkin")) {
+                ClientPlayNetworking.send(new UiPayloadC2S("config",5));
 
             }
             return true;
